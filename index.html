@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OAT Clinic — New Homepage Layout</title>
+<style>
+  :root{
+    --blue:#15679E;
+    --blue-deep:#0E4A73;
+    --navy:#0C2B40;
+    --orange:#F28B1F;
+    --orange-deep:#D97710;
+    --sky:#EAF3F9;
+    --sky-2:#D9E9F4;
+    --white:#FFFFFF;
+    --ink:#16303F;
+    --ink-soft:#46617263;
+    --ink-mid:#4A6375;
+    --line:#D5E2EB;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans); color:var(--ink); background:var(--white);
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;}
+  a{text-decoration:none;}
+
+  /* ---------- shared ---------- */
+  .container{max-width:1140px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    display:inline-block; font-size:12px; font-weight:800; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--orange-deep); margin-bottom:14px;
+  }
+  .eyebrow.on-dark{color:var(--orange);}
+  h1,h2,h3{font-weight:800; line-height:1.15; color:var(--navy); text-wrap:balance;}
+  h2{font-size:clamp(26px,3.6vw,38px); margin-bottom:14px; letter-spacing:-.01em;}
+  .lede{font-size:17px; color:var(--ink-mid); max-width:62ch;}
+  .btn{
+    display:inline-block; font-weight:700; font-size:15.5px; border-radius:8px;
+    padding:14px 26px; transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-orange{background:var(--orange); color:#fff; box-shadow:0 4px 14px rgba(242,139,31,.35);}
+  .btn-orange:hover{background:var(--orange-deep);}
+  .btn-ghost{background:transparent; color:#fff; border:2px solid rgba(255,255,255,.55);}
+  .btn-ghost:hover{border-color:#fff;}
+  .btn-blue{background:var(--blue); color:#fff;}
+  .btn-blue:hover{background:var(--blue-deep);}
+  .btn-outline{background:#fff; color:var(--blue); border:2px solid var(--blue);}
+  section{padding:72px 0;}
+
+  /* ---------- top bar ---------- */
+  .topbar{background:var(--navy); color:#CFE2EF; font-size:13.5px; padding:8px 0;}
+  .topbar .container{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .topbar a{color:#fff; font-weight:700;}
+  .topbar .tel{color:var(--orange);}
+
+  /* ---------- header ---------- */
+  header.site{
+    background:var(--blue); position:sticky; top:0; z-index:50;
+    box-shadow:0 2px 12px rgba(12,43,64,.25);
+  }
+  .nav{display:flex; align-items:center; gap:28px; padding:14px 24px; max-width:1140px; margin:0 auto;}
+  .logo{
+    background:var(--blue); color:#fff; font-weight:900; font-size:20px; line-height:.95;
+    letter-spacing:.02em; display:flex; flex-direction:column; text-transform:uppercase;
+  }
+  .logo .bar{height:5px; width:100%; background:var(--orange); margin-top:5px; border-radius:1px;}
+  .nav ul{display:flex; gap:22px; list-style:none; padding:0; margin:0 auto;}
+  .nav ul a{color:#EAF3F9; font-weight:600; font-size:15px; padding:6px 2px; border-bottom:2px solid transparent;}
+  .nav ul a:hover, .nav ul a.active{color:#fff; border-bottom-color:var(--orange);}
+  .nav .call{color:#fff; font-weight:800; font-size:15px; white-space:nowrap;}
+  .nav .call small{display:block; font-weight:500; font-size:11px; color:#BBD8EA; letter-spacing:.05em;}
+  .nav .btn{padding:11px 20px; font-size:14.5px;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:linear-gradient(160deg, var(--blue) 0%, var(--blue-deep) 70%, var(--navy) 100%);
+    color:#fff; padding:84px 0 0; position:relative; overflow:hidden;
+  }
+  .hero::after{ /* soft orange glow echoing the logo bar */
+    content:""; position:absolute; right:-160px; top:-160px; width:480px; height:480px;
+    background:radial-gradient(circle, rgba(242,139,31,.28), transparent 65%); pointer-events:none;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center; position:relative; z-index:1;}
+  .hero h1{
+    color:#fff; font-size:clamp(34px,5vw,54px); font-weight:900; letter-spacing:-.015em; margin-bottom:18px;
+  }
+  .hero h1 .accent{color:var(--orange);}
+  .hero p{font-size:18px; color:#D7E8F3; max-width:56ch; margin-bottom:26px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:26px;}
+  .hero .returning{font-size:14.5px; color:#BBD8EA;}
+  .hero .returning a{color:#fff; font-weight:700; border-bottom:1px solid var(--orange);}
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 40px;}
+  .chip{
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); color:#fff;
+    font-size:13.5px; font-weight:600; padding:7px 16px; border-radius:999px;
+  }
+  .chip:hover{background:rgba(242,139,31,.85); border-color:transparent;}
+  .hero-card{
+    background:#fff; border-radius:14px; padding:28px; color:var(--ink);
+    box-shadow:0 24px 60px rgba(8,30,46,.45);
+  }
+  .hero-card h3{font-size:19px; margin-bottom:4px;}
+  .hero-card .sub{font-size:13.5px; color:var(--ink-mid); margin-bottom:16px;}
+  .hero-card label{display:block; font-size:12.5px; font-weight:700; color:var(--navy); margin:12px 0 4px;}
+  .hero-card input, .hero-card select{
+    width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:inherit; background:#fff; color:var(--ink);
+  }
+  .hero-card input:focus, .hero-card select:focus{outline:2px solid var(--blue); border-color:var(--blue);}
+  .hero-card .btn{width:100%; text-align:center; margin-top:18px;}
+  .hero-card .privacy{font-size:12px; color:var(--ink-mid); margin-top:10px; text-align:center;}
+  .trustbar{
+    background:var(--orange); margin-top:64px; padding:16px 0; position:relative; z-index:1;
+  }
+  .trustbar .container{display:flex; justify-content:center; gap:12px 48px; flex-wrap:wrap;}
+  .trustbar span{color:#fff; font-weight:800; font-size:15px; display:flex; align-items:center; gap:9px;}
+  .trustbar b{font-size:18px;}
+
+  /* ---------- 3-way access split ---------- */
+  .split{background:var(--sky);}
+  .cards-3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:40px;}
+  .acc-card{
+    background:#fff; border-radius:12px; padding:30px 26px; border-top:5px solid var(--blue);
+    box-shadow:0 6px 22px rgba(21,103,158,.08); display:flex; flex-direction:column;
+  }
+  .acc-card.orange{border-top-color:var(--orange);}
+  .acc-card .icon{
+    width:52px; height:52px; border-radius:12px; background:var(--sky); color:var(--blue);
+    display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:18px;
+  }
+  .acc-card h3{font-size:19px; margin-bottom:8px;}
+  .acc-card p{font-size:14.5px; color:var(--ink-mid); flex:1;}
+  .acc-card a{color:var(--blue); font-weight:700; font-size:14.5px; margin-top:16px;}
+  .acc-card a:hover{color:var(--orange-deep);}
+
+  /* ---------- stats ---------- */
+  .stats{background:var(--navy); color:#fff; padding:56px 0;}
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px; text-align:center;}
+  .stat .n{font-size:clamp(30px,4vw,44px); font-weight:900; color:var(--orange); font-variant-numeric:tabular-nums;}
+  .stat .l{font-size:14px; color:#BBD8EA; margin-top:6px;}
+
+  /* ---------- why grid ---------- */
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:44px;}
+  .why{
+    border:1.5px solid var(--line); border-radius:12px; padding:26px 24px; background:#fff;
+    transition:box-shadow .15s ease, border-color .15s ease;
+  }
+  .why:hover{border-color:var(--blue); box-shadow:0 8px 26px rgba(21,103,158,.12);}
+  .why .dot{width:38px; height:6px; border-radius:3px; background:var(--orange); margin-bottom:16px;}
+  .why h3{font-size:17.5px; margin-bottom:8px;}
+  .why p{font-size:14.5px; color:var(--ink-mid);}
+
+  /* ---------- treatments ---------- */
+  .treat{background:var(--sky);}
+  .treat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:40px;}
+  .t-card{
+    background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 6px 20px rgba(21,103,158,.08);
+    display:flex; flex-direction:column;
+  }
+  .t-card .head{background:var(--blue); color:#fff; padding:18px 20px; font-weight:800; font-size:16.5px;}
+  .t-card.alt .head{background:var(--blue-deep);}
+  .t-card .body{padding:18px 20px; font-size:14px; color:var(--ink-mid); flex:1;}
+  .t-card .foot{padding:0 20px 20px; display:flex; gap:14px; align-items:center;}
+  .t-card .foot a.more{color:var(--blue); font-weight:700; font-size:14px;}
+  .t-card .foot a.book{color:var(--orange-deep); font-weight:700; font-size:14px;}
+
+  /* ---------- journey ---------- */
+  .journey-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:48px; position:relative;}
+  .journey-steps::before{
+    content:""; position:absolute; top:26px; left:12%; right:12%; height:3px;
+    background:var(--sky-2); z-index:0;
+  }
+  .jstep{text-align:center; padding:0 18px; position:relative; z-index:1;}
+  .jstep .num{
+    width:52px; height:52px; border-radius:50%; background:var(--blue); color:#fff;
+    font-weight:900; font-size:19px; display:flex; align-items:center; justify-content:center;
+    margin:0 auto 16px; border:4px solid #fff; box-shadow:0 0 0 3px var(--sky-2);
+  }
+  .jstep:last-child .num{background:var(--orange);}
+  .jstep h3{font-size:16.5px; margin-bottom:6px;}
+  .jstep p{font-size:13.5px; color:var(--ink-mid);}
+
+  /* ---------- pharmacy band ---------- */
+  .pharm{background:linear-gradient(140deg,var(--blue-deep),var(--navy)); color:#fff;}
+  .pharm-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+  .pharm h2{color:#fff;}
+  .pharm p{color:#C9DEEC; font-size:15.5px; margin-bottom:22px;}
+  .pharm ol{list-style:none; padding:0; display:grid; gap:14px; counter-reset:step;}
+  .pharm ol li{
+    counter-increment:step; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14);
+    border-radius:10px; padding:16px 18px 16px 62px; position:relative; font-size:14.5px; color:#E4F0F8;
+  }
+  .pharm ol li::before{
+    content:counter(step,decimal-leading-zero); position:absolute; left:18px; top:50%; transform:translateY(-50%);
+    font-weight:900; font-size:17px; color:var(--orange);
+  }
+  .pharm ol li b{color:#fff; display:block; font-size:15px;}
+
+  /* ---------- locations ---------- */
+  .loc-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:40px;}
+  .loc{
+    border:1.5px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
+  }
+  .loc .map{
+    height:150px; background:linear-gradient(135deg,var(--sky-2),var(--sky));
+    display:flex; align-items:center; justify-content:center; color:var(--blue); font-weight:800;
+    font-size:14px; letter-spacing:.1em; text-transform:uppercase;
+  }
+  .loc .info{padding:24px;}
+  .loc h3{font-size:20px; margin-bottom:6px;}
+  .loc .addr{font-size:14.5px; color:var(--ink-mid); margin-bottom:14px;}
+  .loc .row{display:flex; gap:12px; flex-wrap:wrap;}
+  .loc .row .btn{padding:10px 18px; font-size:14px;}
+  .hours-note{
+    margin-top:26px; background:var(--sky); border-radius:10px; padding:16px 22px;
+    font-size:14.5px; color:var(--ink); display:flex; gap:12px 32px; flex-wrap:wrap; justify-content:center;
+  }
+  .hours-note b{color:var(--blue-deep);}
+
+  /* ---------- FAQ ---------- */
+  .faq{background:var(--sky);}
+  .faq-list{max-width:760px; margin:36px auto 0; display:grid; gap:12px;}
+  .faq-item{background:#fff; border-radius:10px; border:1.5px solid var(--line); overflow:hidden;}
+  .faq-item summary{
+    cursor:pointer; padding:18px 22px; font-weight:700; font-size:15.5px; color:var(--navy);
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:14px;
+  }
+  .faq-item summary::after{content:"+"; color:var(--orange); font-size:22px; font-weight:800;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item .a{padding:0 22px 18px; font-size:14.5px; color:var(--ink-mid);}
+
+  /* ---------- emergency ---------- */
+  .emergency{
+    background:#FDF1E3; border-left:5px solid var(--orange); border-radius:0 10px 10px 0;
+    padding:18px 24px; font-size:14.5px; color:#6B4A1D; max-width:900px; margin:0 auto;
+  }
+  .emergency b{color:#8A5410;}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:linear-gradient(120deg,var(--orange),var(--orange-deep)); color:#fff; text-align:center;
+    padding:64px 0;
+  }
+  .cta-band h2{color:#fff; margin-bottom:10px;}
+  .cta-band p{color:#FFF0DE; margin-bottom:26px; font-size:16.5px;}
+  .cta-band .btn-white{background:#fff; color:var(--orange-deep);}
+  .cta-band .btn-line{border:2px solid rgba(255,255,255,.7); color:#fff;}
+
+  /* ---------- footer ---------- */
+  footer.site{background:var(--navy); color:#9FBCCE; padding:64px 0 0; font-size:14px;}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr 1.2fr; gap:40px;}
+  .foot-grid h4{
+    color:#fff; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:16px;
+  }
+  .foot-grid ul{list-style:none; padding:0; display:grid; gap:9px;}
+  .foot-grid a{color:#B9D2E2;}
+  .foot-grid a:hover{color:var(--orange);}
+  .foot-logo{color:#fff; font-weight:900; font-size:22px; line-height:.95; text-transform:uppercase; display:inline-flex; flex-direction:column;}
+  .foot-logo .bar{height:5px; background:var(--orange); margin-top:5px; border-radius:1px;}
+  .foot-desc{margin-top:16px; max-width:34ch; font-size:13.5px;}
+  .foot-tel{margin-top:18px; display:grid; gap:6px; font-size:14.5px;}
+  .foot-tel a{color:#fff; font-weight:700;}
+  .foot-tel a span{color:var(--orange);}
+  .legal{
+    border-top:1px solid rgba(255,255,255,.12); margin-top:48px; padding:20px 0;
+    font-size:12.5px; color:#7FA0B5;
+  }
+  .legal .container{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .legal a{color:#B9D2E2;}
+
+  /* ---------- mobile ---------- */
+  .mobile-call{display:none;}
+  @media (max-width:920px){
+    .hero-grid,.pharm-grid{grid-template-columns:1fr;}
+    .cards-3,.why-grid,.treat-grid,.journey-steps{grid-template-columns:1fr 1fr;}
+    .journey-steps::before{display:none;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .nav ul{display:none;}
+    .jstep{margin-bottom:28px;}
+  }
+  @media (max-width:600px){
+    .cards-3,.why-grid,.treat-grid,.journey-steps,.loc-grid{grid-template-columns:1fr;}
+    section{padding:52px 0;}
+    .nav .call small{display:none;}
+    .mobile-call{
+      display:flex; position:fixed; bottom:0; left:0; right:0; z-index:60;
+      background:var(--orange); color:#fff; font-weight:800; font-size:16px;
+      justify-content:center; padding:15px; box-shadow:0 -4px 18px rgba(12,43,64,.3);
+    }
+    body{padding-bottom:54px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <span>Same-day OAT assessment — no referral needed &nbsp;·&nbsp; Mon–Fri 10 AM – 6 PM</span>
+    <span>Vancouver <a class="tel" href="tel:6046706580">604-670-6580</a> &nbsp;·&nbsp; Abbotsford <a class="tel" href="tel:6047554408">604-755-4408</a></span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="nav">
+    <a href="#" class="logo" aria-label="OAT Clinic home">OAT<br>Clinic<span class="bar"></span></a>
+    <ul>
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#treatments">Treatments</a></li>
+      <li><a href="#locations">Locations</a></li>
+      <li><a href="#pharmacies">For Pharmacies</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <a class="call" href="tel:6046706580"><small>CALL US NOW</small>604-670-6580</a>
+    <a class="btn btn-orange" href="#help">Get Help Today</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow on-dark">Opioid Addiction Treatment · Vancouver &amp; Abbotsford</span>
+      <h1>Start recovery <span class="accent">today.</span><br>Not next week.</h1>
+      <p>Same-day Methadone, Suboxone, and opioid agonist treatment — in clinic or by telemedicine from your pharmacy, home, or anywhere private. No referral. No waiting rooms. No judgment.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-orange" href="#help">Get Help Today</a>
+        <a class="btn btn-ghost" href="#pharmacies">For Pharmacies</a>
+      </div>
+      <p class="returning">Returning patient? <a href="#locations">Find your clinic →</a></p>
+      <div class="chips" aria-label="We can help with">
+        <span class="chip">Opioids</span><span class="chip">Fentanyl</span><span class="chip">Methadone</span>
+        <span class="chip">Suboxone</span><span class="chip">Benzodiazepines</span><span class="chip">Nicotine</span>
+        <span class="chip">Other Substances</span>
+      </div>
+    </div>
+    <div class="hero-card" id="help">
+      <h3>Request a confidential callback</h3>
+      <p class="sub">Takes under a minute. Our team calls you back the same day, Mon–Fri.</p>
+      <label for="f-name">Your name</label>
+      <input id="f-name" type="text" placeholder="First name is fine">
+      <label for="f-phone">Phone number</label>
+      <input id="f-phone" type="tel" placeholder="604-555-0123">
+      <label for="f-time">Best time to call</label>
+      <select id="f-time">
+        <option>As soon as possible</option>
+        <option>Morning (10 AM – 12 PM)</option>
+        <option>Afternoon (12 – 3 PM)</option>
+        <option>Late afternoon (3 – 6 PM)</option>
+      </select>
+      <a class="btn btn-blue" href="#">Request Callback</a>
+      <p class="privacy">Confidential &amp; secure · <a href="#" style="color:var(--blue)">Privacy Policy</a></p>
+    </div>
+  </div>
+  <div class="trustbar">
+    <div class="container">
+      <span><b>✓</b> Same-Day Assessment</span>
+      <span><b>✓</b> No Referral Required</span>
+      <span><b>✓</b> Telemedicine Available</span>
+      <span><b>✓</b> Confidential Care</span>
+    </div>
+  </div>
+</div>
+
+<!-- 3-WAY ACCESS -->
+<section class="split">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">Three Ways to Get Care</span>
+    <h2>Care that meets you where you are</h2>
+    <p class="lede" style="margin:0 auto;">Whether you walk into a clinic, connect from home, or start at the pharmacy counter you already trust — treatment begins the same day.</p>
+    <div class="cards-3" style="text-align:left;">
+      <div class="acc-card">
+        <div class="icon">🏥</div>
+        <h3>In-Clinic Visits</h3>
+        <p>Visit us in Vancouver or Abbotsford for same-day assessment and treatment planning with our clinical team. No appointment or referral required.</p>
+        <a href="#locations">Find your clinic →</a>
+      </div>
+      <div class="acc-card orange">
+        <div class="icon" style="background:#FDF1E3;color:var(--orange-deep);">💻</div>
+        <h3>Telemedicine</h3>
+        <p>Connect with a doctor from home or any safe, private location — no unnecessary travel, waiting rooms, or delays in starting care.</p>
+        <a href="#help">Request a callback →</a>
+      </div>
+      <div class="acc-card">
+        <div class="icon">💊</div>
+        <h3>Through Your Pharmacy</h3>
+        <p>Pharmacies using WinRx can request an OAT telemedicine appointment for you right at the counter — and you keep the pharmacy you know.</p>
+        <a href="#pharmacies">How it works →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat"><div class="n">Same Day</div><div class="l">Assessment &amp; treatment start</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">Clinic locations — Vancouver &amp; Abbotsford</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">Referrals needed to begin care</div></div>
+    <div class="stat"><div class="n">5 Days</div><div class="l">Open every week, Mon–Fri 10–6</div></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section>
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">Why OAT Clinic</span>
+    <h2>Evidence-based care, delivered with dignity</h2>
+    <div class="why-grid" style="text-align:left;">
+      <div class="why"><div class="dot"></div><h3>Same-Day Access</h3><p>Contact us directly for assessment and treatment planning — because recovery shouldn't have a waiting list.</p></div>
+      <div class="why"><div class="dot"></div><h3>Methadone &amp; Suboxone</h3><p>Full opioid agonist treatment options, tailored and monitored by our clinical team for safety and stability.</p></div>
+      <div class="why"><div class="dot"></div><h3>Telemedicine Support</h3><p>See a doctor from a pharmacy, from home, or from another private location — care fits your life.</p></div>
+      <div class="why"><div class="dot"></div><h3>Pharmacy Coordination</h3><p>We work directly with your dispensing pharmacy through WinRx, so your care stays connected.</p></div>
+      <div class="why"><div class="dot"></div><h3>Confidential &amp; Respectful</h3><p>Your treatment information stays private. Every patient is met with dignity, not judgment.</p></div>
+      <div class="why"><div class="dot"></div><h3>Ongoing Follow-Up</h3><p>Medication education, follow-up appointments, and practical recovery support — beyond the first visit.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TREATMENTS -->
+<section class="treat" id="treatments">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">Our Treatments</span>
+    <h2>Treatment programs built around you</h2>
+    <div class="treat-grid" style="text-align:left;">
+      <div class="t-card"><div class="head">Methadone Treatment</div>
+        <div class="body">Long-acting opioid agonist therapy that reduces withdrawal and cravings within a structured, monitored recovery plan.</div>
+        <div class="foot"><a class="more" href="#">Learn more →</a><a class="book" href="#help">Book</a></div></div>
+      <div class="t-card alt"><div class="head">Suboxone Treatment</div>
+        <div class="body">Buprenorphine/naloxone treatment that eases withdrawal and cravings while lowering the risk of misuse.</div>
+        <div class="foot"><a class="more" href="#">Learn more →</a><a class="book" href="#help">Book</a></div></div>
+      <div class="t-card"><div class="head">Substance Use Treatment</div>
+        <div class="body">Medical and emotional support for substance use — medication, counselling referral, and follow-up planning.</div>
+        <div class="foot"><a class="more" href="#">Learn more →</a><a class="book" href="#help">Book</a></div></div>
+      <div class="t-card alt"><div class="head">Other Treatment Options</div>
+        <div class="body">Benzodiazepine and nicotine support, care planning, and recovery-focused guidance tailored to your situation.</div>
+        <div class="foot"><a class="more" href="#">Learn more →</a><a class="book" href="#help">Book</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section>
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">What to Expect</span>
+    <h2>Your first day, step by step</h2>
+    <p class="lede" style="margin:0 auto;">Simple, transparent, and designed to get you started the same day you reach out.</p>
+    <div class="journey-steps">
+      <div class="jstep"><div class="num">1</div><h3>Reach Out</h3><p>Call, request a callback, or ask at a WinRx pharmacy. No referral needed.</p></div>
+      <div class="jstep"><div class="num">2</div><h3>Same-Day Assessment</h3><p>Our team reviews your history, symptoms, and goals — in clinic or by telemedicine.</p></div>
+      <div class="jstep"><div class="num">3</div><h3>Start Treatment</h3><p>Begin Methadone or Suboxone with a care plan built around your needs and safety.</p></div>
+      <div class="jstep"><div class="num">4</div><h3>Ongoing Support</h3><p>Follow-ups, medication education, pharmacy coordination, and recovery guidance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHARMACY -->
+<section class="pharm" id="pharmacies">
+  <div class="container pharm-grid">
+    <div>
+      <span class="eyebrow on-dark">For Pharmacies</span>
+      <h2>OAT appointments, directly inside WinRx</h2>
+      <p>Pharmacies are often the first healthcare touchpoint patients trust. Request telemedicine OAT appointments, collect signatures, enter urine sample details, and track requests — without faxes, phone tag, or paper referrals.</p>
+      <a class="btn btn-orange" href="#">Pharmacy Guide</a>&nbsp;&nbsp;
+      <a class="btn btn-ghost" href="#">Contact Support</a>
+    </div>
+    <ol>
+      <li><b>Update WinRx</b> to the latest version to unlock the OAT Telemedicine Appointment option.</li>
+      <li><b>Book the appointment</b> from the patient profile — choose Telemedicine or Life Tracking.</li>
+      <li><b>Complete the OAT bundle</b> — signatures by link, direct opening, or on-screen signing.</li>
+      <li><b>Track &amp; order</b> — follow request status and order UDS cups from the same workflow.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section id="locations">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">Our Locations</span>
+    <h2>Two clinics. One phone call away.</h2>
+    <div class="loc-grid" style="text-align:left;">
+      <div class="loc">
+        <div class="map">Map — Vancouver</div>
+        <div class="info">
+          <h3>Vancouver</h3>
+          <p class="addr">633 E Hastings St, Vancouver, BC V6A 2R2<br>Fax: 604-670-6581</p>
+          <div class="row">
+            <a class="btn btn-orange" href="tel:6046706580">Call 604-670-6580</a>
+            <a class="btn btn-outline" href="#">Get Directions</a>
+          </div>
+        </div>
+      </div>
+      <div class="loc">
+        <div class="map">Map — Abbotsford</div>
+        <div class="info">
+          <h3>Abbotsford</h3>
+          <p class="addr">2777 Gladwin Rd #108, Abbotsford, BC V2T 4V1<br>Fax: 604-755-4378</p>
+          <div class="row">
+            <a class="btn btn-orange" href="tel:6047554408">Call 604-755-4408</a>
+            <a class="btn btn-outline" href="#">Get Directions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hours-note">
+      <span><b>Hours:</b> Monday – Friday, 10:00 AM – 6:00 PM</span>
+      <span><b>Weekends:</b> Closed — telemedicine requests reviewed next business day</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">Questions &amp; Answers</span>
+    <h2>Got questions? We've got answers.</h2>
+    <div class="faq-list" style="text-align:left;">
+      <details class="faq-item"><summary>Do I need a referral to start treatment?</summary><p class="a">No. You can contact OAT Clinic directly — by phone, callback request, or through a WinRx pharmacy — and be assessed the same day.</p></details>
+      <details class="faq-item"><summary>Can I receive care by telemedicine?</summary><p class="a">Yes, when clinically appropriate. You can connect with a doctor from home, from a pharmacy, or from another private and safe location.</p></details>
+      <details class="faq-item"><summary>Is my treatment information confidential?</summary><p class="a">Yes. Your care and personal information are kept private and handled respectfully, in line with health privacy requirements.</p></details>
+      <details class="faq-item"><summary>What's the difference between Methadone and Suboxone?</summary><p class="a">Both are evidence-based opioid agonist treatments. Our clinicians review your history and goals with you to determine which option fits best.</p></details>
+      <details class="faq-item"><summary>Can my pharmacy book the appointment for me?</summary><p class="a">Yes — pharmacies using the updated WinRx workflow can request an OAT telemedicine appointment for you directly, and you can keep your same dispensing pharmacy.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY -->
+<section style="padding:40px 0;">
+  <div class="container">
+    <div class="emergency">
+      <b>In crisis?</b> If you are experiencing overdose symptoms, severe withdrawal, chest pain, trouble breathing, or an immediate mental health crisis, <b>call 911</b> or go to the nearest emergency department.
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>You've already taken the hardest step — looking.</h2>
+    <p>Call now or request a callback. Care can start today.</p>
+    <a class="btn btn-white" href="tel:6046706580">Call 604-670-6580</a>&nbsp;&nbsp;
+    <a class="btn btn-line" href="#help">Request a Callback</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="container foot-grid">
+    <div>
+      <span class="foot-logo">OAT<br>Clinic<span class="bar"></span></span>
+      <p class="foot-desc">Evidence-based opioid addiction treatment in Vancouver and Abbotsford — in clinic, by telemedicine, and through your pharmacy.</p>
+      <div class="foot-tel">
+        <a href="tel:6046706580"><span>Vancouver</span> 604-670-6580</a>
+        <a href="tel:6047554408"><span>Abbotsford</span> 604-755-4408</a>
+      </div>
+    </div>
+    <div>
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="#">Methadone Treatment</a></li>
+        <li><a href="#">Suboxone Treatment</a></li>
+        <li><a href="#">Opioid Agonist Therapy</a></li>
+        <li><a href="#">Benzodiazepines</a></li>
+        <li><a href="#">Nicotine</a></li>
+        <li><a href="#">Other Options</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Patient Intake</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#pharmacies">Pharmacy Referrals</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Visit Us</h4>
+      <ul>
+        <li><b style="color:#fff;">Vancouver</b><br>633 E Hastings St, BC V6A 2R2</li>
+        <li style="margin-top:10px;"><b style="color:#fff;">Abbotsford</b><br>2777 Gladwin Rd #108, BC V2T 4V1</li>
+        <li style="margin-top:10px;">Mon–Fri: 10 AM – 6 PM<br>Sat–Sun: Closed</li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <div class="container">
+      <span>© 2026 OAT Clinic. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Use</a> &nbsp;·&nbsp; <a href="#">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="mobile-call" href="tel:6046706580">📞 Call Now — Same-Day Care</a>
+</body>
+</html>
