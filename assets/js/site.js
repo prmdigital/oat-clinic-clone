@@ -155,6 +155,71 @@
     }
   }
 
+  /* ---------- Section rail scroll spy ---------- */
+  var railLinks = doc.querySelectorAll('.doc-nav a[href^="#"]');
+  if (railLinks.length && 'IntersectionObserver' in window) {
+    var byId = {};
+    var targets = [];
+    Array.prototype.forEach.call(railLinks, function (link) {
+      var target = doc.getElementById(link.getAttribute('href').slice(1));
+      if (!target) return;
+      byId[target.id] = link;
+      targets.push(target);
+    });
+
+    var setCurrent = function (id) {
+      Array.prototype.forEach.call(railLinks, function (link) {
+        link.classList.remove('is-current');
+        link.removeAttribute('aria-current');
+      });
+      if (byId[id]) {
+        byId[id].classList.add('is-current');
+        byId[id].setAttribute('aria-current', 'true');
+      }
+    };
+
+    // Track the section nearest the top of the viewport rather than whichever
+    // happens to intersect, so short sections do not steal the highlight.
+    var spy = new IntersectionObserver(function () {
+      var best = null;
+      var bestTop = Infinity;
+      targets.forEach(function (target) {
+        var top = target.getBoundingClientRect().top - 120;
+        if (top <= 0 && Math.abs(top) < bestTop) {
+          bestTop = Math.abs(top);
+          best = target;
+        }
+      });
+      if (!best) best = targets[0];
+      if (best) setCurrent(best.id);
+    }, { rootMargin: '-100px 0px -55% 0px', threshold: [0, 0.25, 0.5, 1] });
+
+    targets.forEach(function (target) { spy.observe(target); });
+
+    // The observer only fires on crossings, so seed the initial state and
+    // keep it honest while scrolling.
+    var railTicking = false;
+    var syncRail = function () {
+      if (railTicking) return;
+      railTicking = true;
+      window.requestAnimationFrame(function () {
+        var best = null;
+        var bestTop = Infinity;
+        targets.forEach(function (target) {
+          var top = target.getBoundingClientRect().top - 120;
+          if (top <= 0 && Math.abs(top) < bestTop) {
+            bestTop = Math.abs(top);
+            best = target;
+          }
+        });
+        if (best) setCurrent(best.id);
+        railTicking = false;
+      });
+    };
+    window.addEventListener('scroll', syncRail, { passive: true });
+    syncRail();
+  }
+
   /* ---------- Callback form ---------- */
   var form = doc.getElementById('callback-form');
   if (form) {

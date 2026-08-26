@@ -35,7 +35,17 @@ TREATMENTS = [
             "Take home doses become possible once your dose is stable",
             "Covered by BC PharmaCare for most residents of British Columbia",
         ],
-        "sections": [
+            "facts": [
+        ('Form', 'Liquid, taken by mouth'),
+        ('Dosing', 'Once daily'),
+        ('Starting', 'No withdrawal needed first'),
+        ('Take home doses', 'After your dose is stable'),
+        ('Cost in BC', 'Covered by PharmaCare'),
+    ],
+    "pullquote": (
+        'Every death in early methadone treatment comes from starting too high or going up too fast. So we start low, and we tell you in advance that it will feel low.'
+    ),
+    "sections": [
             ("how-it-works", "How methadone works", [
                 "<p>Methadone is a full opioid agonist. It occupies the same receptors that "
                 "fentanyl, heroin or prescription opioids act on, which is why it stops "
@@ -212,7 +222,17 @@ TREATMENTS = [
             "Starting requires being in mild withdrawal first, which we plan with you carefully",
             "A monthly injectable form, Sublocade, removes daily dosing altogether",
         ],
-        "sections": [
+            "facts": [
+        ('Form', 'Tablet or film, under the tongue'),
+        ('Dosing', 'Once daily, or monthly injection'),
+        ('Starting', 'Mild withdrawal required first'),
+        ('Take home doses', 'Often within one to two weeks'),
+        ('Cost in BC', 'Covered by PharmaCare'),
+    ],
+    "pullquote": (
+        'If you stop Suboxone, the blockade lifts while your tolerance is now much lower. This is the most dangerous moment in the whole course of treatment.'
+    ),
+    "sections": [
             ("how-it-works", "How Suboxone works", [
                 "<p>Buprenorphine, the active ingredient, is a partial opioid agonist. It binds "
                 "to opioid receptors very tightly but activates them only partly. Two "
@@ -389,7 +409,17 @@ TREATMENTS = [
             "Referral to counselling, housing and community services where you want it",
             "Nobody is refused opioid treatment for using other substances",
         ],
-        "sections": [
+            "facts": [
+        ('Covers', 'Stimulants, alcohol, concurrent care'),
+        ('Medication', 'Available for alcohol use disorder'),
+        ('Stimulants', 'Structured support, no proven drug yet'),
+        ('Counselling', 'By referral, not in house'),
+        ('Cost in BC', 'Appointments billed to MSP'),
+    ],
+    "pullquote": (
+        'Alcohol withdrawal, unlike opioid withdrawal, can be fatal. If you drink heavily every day, do not stop abruptly on your own.'
+    ),
+    "sections": [
             ("stimulants", "Stimulant use", [
                 "<p>Methamphetamine and cocaine use alongside opioid treatment is extremely "
                 "common in British Columbia. There is currently no medication for stimulant use "
@@ -540,7 +570,17 @@ TREATMENTS = [
             "Combining benzodiazepines with opioids is the leading driver of overdose deaths",
             "We treat this alongside opioid agonist treatment rather than before it",
         ],
-        "sections": [
+            "facts": [
+        ('Approach', 'Structured, gradual taper'),
+        ('Typical length', 'Months, sometimes over a year'),
+        ('Never', 'Stop abruptly, withdrawal can cause seizures'),
+        ('Alongside OAT', 'Yes, treated at the same time'),
+        ('Naloxone', 'Does not reverse benzodiazepines'),
+    ],
+    "pullquote": (
+        'Opioid withdrawal is miserable but rarely dangerous. Benzodiazepine withdrawal is the opposite. It can cause seizures, delirium and, in severe cases, death.'
+    ),
+    "sections": [
             ("in-the-supply", "Benzodiazepines in the unregulated supply", [
                 "<p>Since around 2019, benzodiazepines such as etizolam and bromazolam have been "
                 "found in a large share of the unregulated opioid supply in British Columbia. "
@@ -686,7 +726,17 @@ TREATMENTS = [
             "Combination therapy, a patch plus a fast acting product, works better than either alone",
             "Most people need several attempts, and each one raises the odds of the next",
         ],
-        "sections": [
+            "facts": [
+        ('Options', 'Patches, gum, varenicline, bupropion'),
+        ('Cost in BC', 'Free through the provincial programme'),
+        ('Prescription', 'Not needed for nicotine replacement'),
+        ('Best results', 'A patch plus a fast acting product'),
+        ('Alongside OAT', 'Yes, and outcomes tend to improve'),
+    ],
+    "pullquote": (
+        'Around eighty percent of people in opioid agonist treatment smoke, against roughly ten percent of adults in British Columbia. Over a full life, tobacco kills more people in this group than overdose does.'
+    ),
+    "sections": [
             ("why-now", "Why this matters in an opioid clinic", [
                 "<p>It is a strange thing to raise with someone whose life is being organised "
                 "around fentanyl, and we understand why it lands low on the list. The numbers "

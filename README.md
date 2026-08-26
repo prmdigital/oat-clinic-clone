@@ -87,6 +87,17 @@ navigation dropdown, the treatments index, the footer, and cross-links from
 related pages automatically. `faqs` are rendered as an accordion and emitted as
 `FAQPage` structured data.
 
+Two fields drive the page furniture, and both are required:
+
+| Field | What it does |
+| --- | --- |
+| `facts` | Five `(label, value)` pairs. Becomes the at a glance strip under the hero, which is what most visitors scan before deciding to read. |
+| `pullquote` | One sentence, usually the most important safety point. Placed after the second section, where an unbroken text column starts to drag. |
+
+The section rail down the left is generated from `sections`, so anchors and
+numbering stay in step automatically. It sticks on desktop, highlights the
+section you are reading, and collapses to a contents card below 1024px.
+
 ### Change the look
 
 Design tokens are at the top of `assets/css/site.css` under `:root`. Colours,

@@ -160,7 +160,8 @@ def cta_band(heading, text, primary_label='Call {0}'.format(SITE['main_phone']))
                      icon=icon('phone', 17), pl=esc(primary_label))
 
 
-def faq_block(faqs, heading='Questions people actually ask', intro=None, eyebrow='FAQ'):
+def faq_block(faqs, heading='Questions people actually ask', intro=None, eyebrow='FAQ',
+              section_id='faq'):
     items = []
     for q, answers in faqs:
         items.append(
@@ -169,7 +170,7 @@ def faq_block(faqs, heading='Questions people actually ask', intro=None, eyebrow
                 q=esc(q), a=''.join(answers)))
     intro_html = '<p class="lede">{0}</p>'.format(esc(intro)) if intro else ''
     return '''
-<section class="section">
+<section class="section" id="{sid}">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">{e}</span>
@@ -178,7 +179,8 @@ def faq_block(faqs, heading='Questions people actually ask', intro=None, eyebrow
     </div>
     <div class="faq-list">{items}</div>
   </div>
-</section>'''.format(e=esc(eyebrow), h=esc(heading), i=intro_html, items=''.join(items))
+</section>'''.format(sid=section_id, e=esc(eyebrow), h=esc(heading),
+                     i=intro_html, items=''.join(items))
 
 
 def balance_block(balance):
@@ -342,12 +344,33 @@ def build_treatment(t):
     path = '/treatments/{0}/'.format(t['slug'])
     crumb_items = [('Home', '/'), ('Treatments', '/treatments/'), (t['name'], None)]
 
-    sections = []
-    for anchor, heading, blocks in t['sections']:
-        sections.append(
-            '<section class="section" id="{a}"><div class="wrap"><div class="prose">'
-            '<h2>{h}</h2>{b}</div></div></section>'.format(
-                a=anchor, h=esc(heading), b=''.join(blocks)))
+    # At a glance strip. Structured facts answer the questions people scan for
+    # before committing to reading, and give the page something other than
+    # paragraphs to look at.
+    facts = ''.join(
+        '<div class="spec-item"><div class="k">{k}</div><div class="v">{v}</div></div>'
+        .format(k=esc(k), v=esc(v)) for k, v in t['facts'])
+
+    # Sticky rail. Long clinical pages are much easier to use when you can see
+    # the shape of the whole thing and jump within it.
+    nav = ''.join(
+        '<li><a href="#{a}">{h}</a></li>'.format(a=a, h=esc(h))
+        for a, h, _ in t['sections'])
+    nav += '<li><a href="#balance">Benefits and trade offs</a></li>'
+    nav += '<li><a href="#faq">Questions answered</a></li>'
+
+    # The pull quote lands after the second section, which is the point where
+    # an unbroken text column starts to feel long.
+    blocks = []
+    for i, (anchor, heading, body_blocks) in enumerate(t['sections']):
+        blocks.append(
+            '<section class="doc-section" id="{a}">'
+            '<h2>{h}</h2><div class="prose">{b}</div></section>'.format(
+                a=anchor, h=esc(heading), b=''.join(body_blocks)))
+        if i == 1:
+            blocks.append(
+                '<blockquote class="pullquote"><p>{q}</p></blockquote>'.format(
+                    q=esc(t['pullquote'])))
 
     related = ''.join(
         '<a class="card" href="/treatments/{s}/"><div class="card-body">'
@@ -363,15 +386,31 @@ def build_treatment(t):
               '<a class="btn btn-ghost" href="/contact/">Request a callback</a></div>'.format(
                   ph=SITE['main_phone_href'], pi=icon('phone', 17), p=SITE['main_phone']),
     ) + '''
-<section class="section-sm">
-  <div class="wrap" style="max-width:860px;">{key}</div>
+<div class="spec"><div class="wrap">{facts}</div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="doc">
+      <aside class="doc-nav" aria-label="On this page">
+        <p class="h">On this page</p>
+        <ol>{nav}</ol>
+        <div class="doc-nav-cta">
+          <a class="btn btn-primary" href="{ph}">{pi} Call {phone}</a>
+        </div>
+      </aside>
+      <div class="doc-body">
+        {key}
+        {blocks}
+      </div>
+    </div>
+  </div>
 </section>
-{sections}
-<section class="section band-tint">
+
+<section class="section band-tint" id="balance">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">An honest comparison</span>
       <h2>What this treatment does well, and what to weigh up</h2>
+      <p class="lede">Every option has trade offs. Here are both sides.</p>
     </div>
     {balance}
   </div>
@@ -379,10 +418,7 @@ def build_treatment(t):
 {faq}
 <section class="section band-tint">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Related</span>
-      <h2>Other programmes</h2>
-    </div>
+    <div class="sec-head"><h2>Other programmes</h2></div>
     <div class="grid-3">{related}</div>
   </div>
 </section>
@@ -391,17 +427,19 @@ def build_treatment(t):
 </section>
 {cta}
 '''.format(
+        facts=facts, nav=nav, blocks=''.join(blocks),
         key=keypoints_block(t['keypoints']),
-        sections=''.join(sections),
+        ph=SITE['main_phone_href'], pi=icon('phone', 17), phone=SITE['main_phone'],
         balance=balance_block(t['balance']),
         faq=faq_block(t['faqs'],
                       heading='{0}: your questions answered'.format(t['name']),
-                      intro='These are the questions our physicians are asked most often about '
-                            'this treatment. If yours is not here, call us and ask.'),
+                      intro='These are the questions our physicians are asked most often '
+                            'about this treatment. If yours is not here, call us and ask.'),
         related=related,
         emergency=emergency_note(),
         cta=cta_band('Ready to talk about {0}?'.format(t['name'].lower()),
-                     'No referral needed. Assessment and, where appropriate, treatment the same day.'),
+                     'No referral needed. Assessment and, where appropriate, treatment '
+                     'the same day.'),
     )
 
     canonical = SITE['base_url'] + path
