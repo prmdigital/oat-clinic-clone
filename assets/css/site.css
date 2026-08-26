@@ -50,7 +50,7 @@
 
   /* Rhythm. Sections breathe more than they did. */
   --gap:clamp(20px,2.4vw,30px);
-  --section:clamp(72px,9vw,132px);
+  --section:clamp(44px,5vw,76px);
   --radius:8px;
   --radius-lg:16px;
   --radius-pill:999px;
@@ -108,7 +108,7 @@ ul,ol{padding:0;list-style:none;}
 .wrap-narrow{max-width:790px;}
 .wrap-wide{max-width:1440px;}
 .section{padding-block:var(--section);}
-.section-sm{padding-block:clamp(44px,5vw,72px);}
+.section-sm{padding-block:clamp(28px,3.2vw,48px);}
 .stack>*+*{margin-top:1.05em;}
 .rule{height:1px;background:var(--line);border:0;}
 .center{text-align:center;}
@@ -169,7 +169,7 @@ p{text-wrap:pretty;}
 .prose h2{margin-top:1.9em;margin-bottom:.5em;}
 .prose h3{margin-top:1.7em;margin-bottom:.4em;}
 .prose h2:first-child,.prose h3:first-child{margin-top:0;}
-.prose p+p{margin-top:1.05em;}
+.prose > * + *{margin-top:1.05em;}
 .prose ul,.prose ol{margin-top:1.05em;display:grid;gap:.6em;}
 .prose ul li{position:relative;padding-left:24px;}
 .prose ul li::before{
@@ -396,7 +396,7 @@ body.no-scroll{overflow:hidden;}
 }
 .hero .wrap{
   position:relative;z-index:1;text-align:center;
-  padding-block:clamp(64px,9vw,124px);
+  padding-block:clamp(48px,6vw,88px);
   max-width:1000px;
 }
 .hero h1{margin-bottom:22px;}
@@ -538,7 +538,7 @@ body.no-scroll{overflow:hidden;}
   background:radial-gradient(90% 120% at 78% 0%,rgba(192,118,28,.16) 0%,rgba(192,118,28,0) 62%);
   pointer-events:none;
 }
-.pagehead .wrap{position:relative;z-index:1;padding-block:clamp(40px,5.5vw,76px);}
+.pagehead .wrap{position:relative;z-index:1;padding-block:clamp(32px,4vw,58px);}
 .pagehead h1{color:var(--white);max-width:16ch;}
 .pagehead .lede{color:#BCD1DD;margin-top:20px;}
 .pagehead-body{max-width:760px;}
@@ -639,12 +639,12 @@ body.no-scroll{overflow:hidden;}
 .stat .l{font-size:14.5px;color:var(--ink-2);line-height:1.45;}
 
 /* ---------- 12. Section headers ---------- */
-.sec-head{max-width:62ch;margin-bottom:clamp(34px,4vw,56px);}
+.sec-head{max-width:62ch;margin-bottom:clamp(24px,2.6vw,38px);}
 .sec-head.center{margin-inline:auto;text-align:center;}
 .sec-head h2+.lede{margin-top:16px;}
 .sec-head-split{
   display:flex;justify-content:space-between;align-items:flex-end;
-  gap:32px;flex-wrap:wrap;margin-bottom:clamp(34px,4vw,56px);
+  gap:32px;flex-wrap:wrap;margin-bottom:clamp(24px,2.6vw,38px);
 }
 .sec-head-split .sec-head{margin-bottom:0;}
 
@@ -767,7 +767,7 @@ a.card:hover,.card:hover{
 .faq-item .plus::after{width:1.5px;height:14px;}
 .faq-item[open] .plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0;}
 .faq-answer{padding:0 0 26px;max-width:70ch;}
-.faq-answer p+p{margin-top:.9em;}
+.faq-answer > * + *{margin-top:.9em;}
 .faq-answer p{font-size:16px;}
 .faq-answer ul{margin-top:.9em;display:grid;gap:.5em;}
 .faq-answer ul li{position:relative;padding-left:22px;font-size:16px;}
@@ -936,7 +936,7 @@ a.card:hover,.card:hover{
 .foot-main{
   display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;
   gap:clamp(28px,4vw,56px);
-  padding-block:clamp(48px,5.5vw,76px);
+  padding-block:clamp(40px,4.4vw,60px);
 }
 .foot-desc{margin-top:20px;font-size:15px;line-height:1.6;max-width:38ch;}
 .foot-phones{margin-top:24px;display:grid;gap:12px;}

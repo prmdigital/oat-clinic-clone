@@ -131,7 +131,7 @@ def build_home():
       <h2>How it works</h2>
     </div>
     <div class="steps steps-3 reveal stagger">{steps}</div>
-    <div class="btn-row reveal" style="justify-content:center;margin-top:48px;">
+    <div class="btn-row reveal" style="justify-content:center;margin-top:34px;">
       <a class="btn btn-outline" href="/what-to-expect/">Read the full walkthrough</a>
     </div>
   </div>
