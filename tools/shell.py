@@ -176,9 +176,8 @@ def _nav_panel_treatments():
     rows = []
     for t in TREATMENTS:
         rows.append(
-            '<a href="/treatments/{s}/"><span class="t">{n}</span>'
-            '<span class="d">{d}</span></a>'.format(
-                s=t['slug'], n=esc(t['nav_name']), d=esc(t['nav_desc'])))
+            '<a href="/treatments/{s}/">{n}</a>'.format(
+                s=t['slug'], n=esc(t['nav_name'])))
     rows.append('<div class="all"><a href="/treatments/">All treatment programmes '
                 + icon('arrow', 15) + '</a></div>')
     return ''.join(rows)
@@ -188,9 +187,8 @@ def _nav_panel_locations():
     rows = []
     for l in LOCATIONS:
         rows.append(
-            '<a href="/locations/{s}/"><span class="t">{c}</span>'
-            '<span class="d">{a}</span></a>'.format(
-                s=l['slug'], c=esc(l['city']), a=esc(l['street'])))
+            '<a href="/locations/{s}/">{c}</a>'.format(
+                s=l['slug'], c=esc(l['city'])))
     rows.append('<div class="all"><a href="/locations/">All five clinics '
                 + icon('arrow', 15) + '</a></div>')
     return ''.join(rows)

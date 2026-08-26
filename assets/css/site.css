@@ -286,7 +286,7 @@ p{text-wrap:pretty;}
 .nav-panel{
   position:absolute;top:calc(100% + 10px);left:50%;
   transform:translateX(-50%) translateY(-6px);
-  min-width:300px;background:var(--white);
+  min-width:212px;background:var(--white);
   border:1px solid var(--line);border-radius:var(--radius-lg);
   box-shadow:0 24px 60px -28px rgba(10,58,85,.45),0 2px 8px -4px rgba(10,58,85,.2);
   padding:9px;opacity:0;visibility:hidden;pointer-events:none;
@@ -297,17 +297,25 @@ p{text-wrap:pretty;}
   transform:translateX(-50%) translateY(0);
   transition:opacity .18s var(--ease),transform .18s var(--ease),visibility 0s linear 0s;
 }
+/* Names only. The .t and .d spans this replaced had no display:block, so the
+   name and its description ran together on one line. */
 .nav-panel a{
-  display:block;padding:10px 13px;border-radius:var(--radius);
-  transition:background-color .14s var(--ease);
+  display:block;padding:9px 13px;border-radius:var(--radius);
+  font-size:15px;font-weight:500;color:var(--ink);white-space:nowrap;
+  transition:background-color .14s var(--ease),color .14s var(--ease);
 }
-.nav-panel a:hover{background:var(--paper-2);}
-.nav-panel .t{font-size:15px;font-weight:600;color:var(--ink);}
-.nav-panel .d{font-size:13px;color:var(--ink-3);line-height:1.45;margin-top:1px;}
+.nav-panel a:hover{background:var(--paper-2);color:var(--blue);}
 .nav-panel .all{
   border-top:1px solid var(--line);margin-top:7px;padding-top:9px;
 }
-.nav-panel .all a{color:var(--blue);font-size:14px;font-weight:600;}
+/* The global reset makes svg display:block, which pushed the arrow onto its
+   own line inside this text link. Flex keeps them together. */
+.nav-panel .all a{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--blue);font-size:14px;font-weight:600;
+}
+.nav-panel .all a svg{transition:transform .22s var(--ease);}
+.nav-panel .all a:hover svg{transform:translateX(3px);}
 
 /* Masthead call block */
 .mast-call{flex:none;text-align:right;line-height:1.2;}
