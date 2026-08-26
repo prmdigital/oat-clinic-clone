@@ -223,7 +223,7 @@ def masthead(active):
       <span class="l">Call us now</span>
       <span class="n">{phone}</span>
     </a>
-    <a class="btn btn-primary mast-cta" href="/contact/">Get help today</a>
+    <a class="btn btn-accent mast-cta" href="/contact/">Get help today</a>
 
     <button class="burger" type="button" aria-expanded="false"
             aria-controls="drawer" aria-label="Open menu"><span></span></button>
@@ -287,8 +287,7 @@ def footer():
         '<li><a href="{h}">{n}</a></li>'.format(h=h, n=esc(n))
         for n, h in FOOTER_QUICK_LINKS)
     addr = ''.join(
-        '<li><b>{c}</b><a href="/locations/{s}/">{st}</a><br>{p}</li>'.format(
-            c=esc(l['city']), s=l['slug'], st=esc(l['street']), p=esc(l['postal']))
+        '<li><a href="/locations/{s}/">{c}</a></li>'.format(s=l['slug'], c=esc(l['city']))
         for l in LOCATIONS)
 
     return '''
@@ -316,7 +315,7 @@ def footer():
       </div>
       <div>
         <h3>Our clinics</h3>
-        <ul class="foot-addr">{addr}</ul>
+        <ul class="foot-links">{addr}</ul>
       </div>
     </div>
     <p class="foot-disclaimer">

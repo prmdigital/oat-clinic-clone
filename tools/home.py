@@ -27,8 +27,8 @@ def build_home():
 <section class="hero">
   <div class="wrap reveal stagger">
     <h1>Treatment that starts <span class="hl">today</span>, not next month.</h1>
-    <p class="lede">Methadone, Suboxone and substance use care across the Lower
-      Mainland, in person or by telemedicine.</p>
+    <p class="lede">Methadone, Suboxone and substance use care, in person or by
+      telemedicine.</p>
     <div class="btn-row">
       <a class="btn btn-primary" href="{ph}">{phi} Call {phone}</a>
       <a class="btn btn-outline" href="/contact/">Request a callback</a>
