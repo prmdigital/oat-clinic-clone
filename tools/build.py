@@ -379,14 +379,40 @@ def build_treatment(t):
                             d=esc(TREATMENT_BY_SLUG[r]['nav_desc']), ar=icon('arrow', 15))
         for r in t['related'])
 
+    # Cards first, so the page answers what / how / what to expect before it
+    # asks anyone to read prose.
+    cards = ''.join(
+        '<div class="tcard"><span class="ico">{ic}</span><h3>{h}</h3><p>{b}</p></div>'
+        .format(ic=icon(k, 24, 1.6), h=esc(head), b=esc(bodytext))
+        for k, head, bodytext in t['cards'])
+
+    stats = ''.join(
+        '<div class="tstat"><div class="n">{v}</div><div class="l">{l}</div>'
+        '<div class="src">{s}</div></div>'
+        .format(v=esc(v), l=esc(l), s=esc(src)) for v, l, src in t['stats'])
+
     body = pagehead(
-        crumbs(crumb_items), t['h1'], t['lede'],
+        crumbs(crumb_items), t['h1'], t['summary'],
         aside='<div class="btn-row">'
               '<a class="btn btn-primary" href="{ph}">{pi} Call {p}</a>'
               '<a class="btn btn-ghost" href="/contact/">Request a callback</a></div>'.format(
                   ph=SITE['main_phone_href'], pi=icon('phone', 17), p=SITE['main_phone']),
     ) + '''
 <div class="spec"><div class="wrap">{facts}</div></div>
+
+<section class="section-sm">
+  <div class="wrap">
+    <div class="tcards">{cards}</div>
+  </div>
+</section>
+
+<section class="section-sm band-tint">
+  <div class="wrap">
+    <div class="tstats">{stats}</div>
+    <p class="tstats-note">Figures are sourced above. Nothing on this page is a
+      substitute for an assessment by a clinician who knows your history.</p>
+  </div>
+</section>
 
 <section class="section">
   <div class="wrap">
@@ -399,7 +425,6 @@ def build_treatment(t):
         </div>
       </aside>
       <div class="doc-body">
-        {key}
         {blocks}
       </div>
     </div>
@@ -428,7 +453,7 @@ def build_treatment(t):
 {cta}
 '''.format(
         facts=facts, nav=nav, blocks=''.join(blocks),
-        key=keypoints_block(t['keypoints']),
+        cards=cards, stats=stats,
         ph=SITE['main_phone_href'], pi=icon('phone', 17), phone=SITE['main_phone'],
         balance=balance_block(t['balance']),
         faq=faq_block(t['faqs'],

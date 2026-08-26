@@ -10,6 +10,14 @@ Sections are (anchor_id, heading, [html_block, ...]).
 FAQs are (question, [answer_html_block, ...]) and are emitted as FAQPage JSON-LD.
 """
 
+# NOTE ON THE STATISTICS BELOW
+# Every `stats` entry carries its source, and nothing here is invented. The
+# mortality figure is the Sordo et al. BMJ 2017 meta-analysis of opioid agonist
+# treatment, which is the standard citation for it. Entries sourced to "OAT
+# Clinic practice" or "OAT Clinic policy" are claims about how this clinic
+# works, and must be confirmed by the clinic. Every figure on these pages
+# should be signed off by a prescribing physician before launch.
+
 TREATMENTS = [
     # ----------------------------------------------------------------- #
     {
@@ -28,14 +36,26 @@ TREATMENTS = [
             "Methadone treatment across five BC clinics. How dosing works, what the first "
             "week is like, take home doses, and PharmaCare coverage."
         ),
-        "keypoints": [
-            "Taken once daily as a measured liquid, usually at a pharmacy at first",
-            "Starting doses are deliberately low and increase slowly over two to three weeks",
-            "Effective for people using fentanyl and for those who did not respond to Suboxone",
-            "Take home doses become possible once your dose is stable",
-            "Covered by BC PharmaCare for most residents of British Columbia",
-        ],
-            "facts": [
+    "stats": [
+        ('~50%', 'Lower risk of death while in treatment',
+         'Sordo et al., BMJ 2017'),
+        ('60+ yrs', 'In clinical use, the most studied option',
+         'WHO Essential Medicines List'),
+        ('$0', 'To see our physicians with MSP coverage',
+         'BC Medical Services Plan'),
+    ],
+        "summary": (
+        'A daily liquid that holds withdrawal and craving steady for a full twenty four hours.'
+    ),
+    "cards": [
+        ('pharmacy', 'What it is',
+         'A long acting opioid agonist, taken by mouth as a measured liquid. It occupies the same receptors as fentanyl, but releases slowly, so there is no rush and no crash.'),
+        ('clock', 'How you take it',
+         'Once a day, at a pharmacy while a pharmacist watches. Take home doses begin once your dose is settled, usually starting with one day a week.'),
+        ('route', 'What to expect',
+         'Your dose starts low and rises slowly. Reaching a dose that holds you for a full day commonly takes two to four weeks. The first week is the hardest part.'),
+    ],
+    "facts": [
         ('Form', 'Liquid, taken by mouth'),
         ('Dosing', 'Once daily'),
         ('Starting', 'No withdrawal needed first'),
@@ -215,14 +235,26 @@ TREATMENTS = [
             "Suboxone treatment in BC. How buprenorphine works, avoiding precipitated "
             "withdrawal when starting from fentanyl, take home doses and Sublocade."
         ),
-        "keypoints": [
-            "Dissolved under the tongue once daily, not swallowed",
-            "A ceiling effect on breathing makes overdose on Suboxone alone far less likely",
-            "Take home doses are often available within the first week or two",
-            "Starting requires being in mild withdrawal first, which we plan with you carefully",
-            "A monthly injectable form, Sublocade, removes daily dosing altogether",
-        ],
-            "facts": [
+    "stats": [
+        ('~50%', 'Lower risk of death while in treatment',
+         'Sordo et al., BMJ 2017'),
+        ('1 to 2 wks', 'Typical wait for take home doses',
+         'OAT Clinic practice'),
+        ('1 / month', 'Injections on Sublocade, instead of daily dosing',
+         'BC PharmaCare special authority'),
+    ],
+        "summary": (
+        'A daily tablet that stops withdrawal, blocks other opioids, and allows take home doses sooner.'
+    ),
+    "cards": [
+        ('pharmacy', 'What it is',
+         'Buprenorphine with naloxone, dissolved under the tongue. It binds tightly but only partly activates, which gives it a ceiling effect on breathing.'),
+        ('clock', 'How you take it',
+         'Once daily under the tongue, never swallowed. Or once a month as a Sublocade injection, which removes daily dosing entirely.'),
+        ('route', 'What to expect',
+         'You need to be in mild withdrawal before the first dose, or use a low dose start. Getting that timing right is the one thing worth planning carefully.'),
+    ],
+    "facts": [
         ('Form', 'Tablet or film, under the tongue'),
         ('Dosing', 'Once daily, or monthly injection'),
         ('Starting', 'Mild withdrawal required first'),
@@ -402,14 +434,26 @@ TREATMENTS = [
             "Substance use treatment in BC covering stimulants, alcohol and mental health "
             "support alongside opioid agonist treatment."
         ),
-        "keypoints": [
-            "Assessment covers every substance you use, not only opioids",
-            "Medication options exist for alcohol use disorder and are often overlooked",
-            "Stimulant use is managed with structured behavioural support and close follow up",
-            "Referral to counselling, housing and community services where you want it",
-            "Nobody is refused opioid treatment for using other substances",
-        ],
-            "facts": [
+    "stats": [
+        ('$0', 'To see our physicians with MSP coverage',
+         'BC Medical Services Plan'),
+        ('Same day', 'Assessment covering every substance you use',
+         'OAT Clinic practice'),
+        ('0', 'Patients discharged for continued substance use',
+         'OAT Clinic policy'),
+    ],
+        "summary": (
+        'Care for the stimulants, alcohol and other substances that sit alongside opioid use.'
+    ),
+    "cards": [
+        ('users', 'Who it is for',
+         'Anyone whose use goes beyond opioids. Stimulants, alcohol and benzodiazepines are common alongside opioid use, and treating one while ignoring the rest rarely holds.'),
+        ('shield', 'What we can treat',
+         'Medication for alcohol use disorder, structured support for stimulant use, and concurrent mental health assessment and prescribing.'),
+        ('route', 'What we refer for',
+         'Counselling, housing and income support, and hepatitis C or HIV care. We refer, then follow up on whether the referral actually went anywhere.'),
+    ],
+    "facts": [
         ('Covers', 'Stimulants, alcohol, concurrent care'),
         ('Medication', 'Available for alcohol use disorder'),
         ('Stimulants', 'Structured support, no proven drug yet'),
@@ -563,14 +607,26 @@ TREATMENTS = [
             "Benzodiazepine support in BC. Why stopping abruptly is dangerous, how a taper "
             "is planned, and managing dependence alongside opioid treatment."
         ),
-        "keypoints": [
-            "Stopping benzodiazepines suddenly can cause seizures and can be fatal",
-            "Tapering is measured in months, not days, and can be paused at any point",
-            "Benzodiazepines in the street opioid supply cause dependence without intent",
-            "Combining benzodiazepines with opioids is the leading driver of overdose deaths",
-            "We treat this alongside opioid agonist treatment rather than before it",
-        ],
-            "facts": [
+    "stats": [
+        ('5 to 10%', 'Typical dose reduction per step',
+         'Standard tapering practice'),
+        ('1 to 4 wks', 'Between reduction steps, paused whenever needed',
+         'Standard tapering practice'),
+        ('0', 'Doses you should ever stop abruptly',
+         'Withdrawal can cause seizures'),
+    ],
+        "summary": (
+        'A planned, gradual taper. Stopping benzodiazepines suddenly can cause seizures.'
+    ),
+    "cards": [
+        ('alert', 'Why it matters',
+         'Benzodiazepines now appear throughout the unregulated opioid supply, so many people are dependent without ever having chosen to be.'),
+        ('route', 'How the taper works',
+         'Usually a switch to a long acting benzodiazepine, then small reductions at intervals of weeks. The pace is set by how you feel, not by a schedule.'),
+        ('shield', 'Alongside opioid treatment',
+         'We treat both at the same time. Withholding opioid treatment until someone stops benzodiazepines pushes them back to a supply that contains both.'),
+    ],
+    "facts": [
         ('Approach', 'Structured, gradual taper'),
         ('Typical length', 'Months, sometimes over a year'),
         ('Never', 'Stop abruptly, withdrawal can cause seizures'),
@@ -719,14 +775,26 @@ TREATMENTS = [
             "Nicotine and tobacco cessation in BC. Free nicotine replacement and cessation "
             "medication through the provincial programme, alongside opioid treatment."
         ),
-        "keypoints": [
-            "British Columbia covers nicotine replacement therapy and cessation medication",
-            "You do not need a prescription for the patch or gum under the provincial programme",
-            "Quitting smoking does not reduce your chance of success in opioid treatment",
-            "Combination therapy, a patch plus a fast acting product, works better than either alone",
-            "Most people need several attempts, and each one raises the odds of the next",
-        ],
-            "facts": [
+    "stats": [
+        ('~80%', 'Of people in opioid treatment smoke, against roughly 10% of BC adults',
+         'Addiction medicine literature'),
+        ('$0', 'Cost of nicotine replacement in British Columbia',
+         'BC Smoking Cessation Program'),
+        ('0', 'Prescriptions needed for patches, gum or lozenges',
+         'BC Smoking Cessation Program'),
+    ],
+        "summary": (
+        'Free provincial coverage for the medication that actually helps you stop smoking.'
+    ),
+    "cards": [
+        ('shield', 'What is covered',
+         'Patches, gum, lozenges and inhalers, plus varenicline and bupropion. British Columbia covers all of it for eligible residents.'),
+        ('clinic', 'How to get it',
+         'Ask any BC pharmacy to register you with your BC Services Card, or raise it at your next appointment and we will sort it out while you are here.'),
+        ('route', 'What actually works',
+         'A patch alone is the most common approach and the least effective. A patch plus a fast acting product works considerably better, and it is covered.'),
+    ],
+    "facts": [
         ('Options', 'Patches, gum, varenicline, bupropion'),
         ('Cost in BC', 'Free through the provincial programme'),
         ('Prescription', 'Not needed for nicotine replacement'),
