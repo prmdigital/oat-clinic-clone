@@ -48,9 +48,9 @@ def build_home():
         ''.join('<div class="proof-item">{ic}<span>{t}</span></div>'.format(
             ic=icon(k, 19), t=esc(t)) for k, t in proof_items))
 
-    # ------------------------------------------------------- three ways in
     from illustrations import art
 
+    # ------------------------------------------------------- three ways in
     ways = [
         ('clinic', False, 'Walk into a clinic',
          'Five locations across the Lower Mainland. Assessment and, where appropriate, '
@@ -105,13 +105,14 @@ def build_home():
 <section class="section band-tint">
   <div class="wrap">
     <div class="sec-head center reveal">
+      <div class="sec-art">{art}</div>
       <h2>What we treat</h2>
       <p class="lede" style="margin-inline:auto;">Opioids are rarely the whole picture,
         so our assessment covers everything you use.</p>
     </div>
     <div class="tiles reveal stagger">{tiles}</div>
   </div>
-</section>'''.format(tiles=tiles)
+</section>'''.format(tiles=tiles, art=art('meds'))
 
     # -------------------------------------------------------- how it works
     steps = [
@@ -160,11 +161,12 @@ def build_home():
           pharmacy suits you.</p>
         <p class="lede" style="margin-top:18px;">Choose a clinic for its address,
           hours, parking and directions.</p>
+        <div class="side-art">{art}</div>
       </div>
       <div class="places reveal stagger">{places}</div>
     </div>
   </div>
-</section>'''.format(places=places)
+</section>'''.format(places=places, art=art('map'))
 
     # ---------------------------------------------------------- pharmacies
     pharmacies = '''
@@ -179,6 +181,7 @@ def build_home():
         <div class="btn-row" style="margin-top:30px;">
           <a class="btn btn-primary" href="/for-pharmacies/">See how it works</a>
         </div>
+        <div class="side-art on-dark">{art}</div>
       </div>
       <ol class="split-list reveal stagger">
         <li><b>Update WinRx</b> so the OAT telemedicine option appears on the patient profile.</li>
@@ -188,7 +191,7 @@ def build_home():
       </ol>
     </div>
   </div>
-</section>'''
+</section>'''.format(art=art('workflow'))
 
     # ---------------------------------------------------------------- blog
     blog = '''

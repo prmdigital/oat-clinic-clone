@@ -22,15 +22,23 @@ These are inline SVG, so they cost no extra request and inherit the palette.
 
 _OPEN = ('<svg class="art" viewBox="0 0 240 150" role="img" '
          'aria-label="{alt}" xmlns="http://www.w3.org/2000/svg">'
-         '<rect width="240" height="150" rx="14" fill="var(--blue-tint)"/>')
+         '<rect width="240" height="150" rx="14" fill="{bg}"/>')
 _CLOSE = '</svg>'
 
 # A deeper tint than --blue-tint, used for ground planes and receding shapes.
 SHADE = '#C9DFEE'
 
 
-def _wrap(alt, inner):
-    return _OPEN.format(alt=alt) + inner + _CLOSE
+def _wrap(alt, inner, bg='var(--blue-tint)'):
+    return _OPEN.format(alt=alt, bg=bg) + inner + _CLOSE
+
+
+def _pin(x, y, fill='var(--blue)'):
+    """A map pin whose point sits exactly at x, y."""
+    return (
+        '<path d="M{x} {y}c-7-9-12-15-12-21a12 12 0 0 1 24 0c0 6-5 12-12 21z" '
+        'fill="{f}"/><circle cx="{x}" cy="{cy}" r="4.5" fill="#fff"/>'
+    ).format(x=x, y=y, cy=y - 21, f=fill)
 
 
 def clinic():
@@ -102,10 +110,79 @@ def pharmacy():
     ))
 
 
+def meds():
+    """What we treat: a dosing bottle, a measuring cup, a blister strip."""
+    return _wrap('Illustration of treatment medication', (
+        '<rect x="0" y="120" width="240" height="30" fill="%s"/>' % SHADE
+        # liquid bottle
+        + '<rect x="46" y="36" width="26" height="12" rx="3" fill="var(--blue-2)"/>'
+        + '<rect class="art-lift" x="38" y="48" width="42" height="72" rx="7" '
+          'fill="var(--blue)"/>'
+        + '<rect x="45" y="66" width="28" height="26" rx="3" fill="#fff"/>'
+        + '<rect x="50" y="74" width="18" height="3.5" rx="1.75" fill="%s"/>' % SHADE
+        + '<rect x="50" y="81" width="12" height="3.5" rx="1.75" fill="%s"/>' % SHADE
+        # measuring cup with a measured dose
+        + '<path d="M96 86h34l-4 34h-26z" fill="#fff" stroke="var(--blue)" '
+          'stroke-width="3" stroke-linejoin="round"/>'
+        + '<path d="M99 104h28l-2 16h-24z" fill="var(--orange)"/>'
+        # blister strip
+        + '<rect x="150" y="58" width="62" height="46" rx="8" fill="#fff" '
+          'stroke="var(--blue)" stroke-width="3"/>'
+        + '<circle cx="167" cy="74" r="6" fill="var(--blue-tint)"/>'
+        + '<circle cx="181" cy="74" r="6" fill="var(--blue-tint)"/>'
+        + '<circle cx="195" cy="74" r="6" fill="var(--blue-tint)"/>'
+        + '<circle cx="167" cy="90" r="6" fill="var(--blue-tint)"/>'
+        + '<circle cx="181" cy="90" r="6" fill="var(--sage)"/>'
+        + '<circle cx="195" cy="90" r="6" fill="var(--blue-tint)"/>'
+    ))
+
+
+def map_pins():
+    """Locations: five pins over a simplified stretch of coast and river."""
+    return _wrap('Illustration of a map with five clinic locations', (
+        # land
+        '<path d="M0 44c34-10 58 4 92 2s52-16 88-12 46 16 60 12v104H0z" fill="#fff"/>'
+        # water running through it
+        + '<path d="M-4 92c40-14 66 10 104 2s58-24 96-16 44 14 48 12" fill="none" '
+          'stroke="%s" stroke-width="9" stroke-linecap="round"/>' % SHADE
+        # roads
+        + '<path d="M28 150l38-56M132 150l-16-42M196 148l-14-40" fill="none" '
+          'stroke="%s" stroke-width="4" stroke-linecap="round"/>' % SHADE
+        # five clinics, the nearest one picked out in orange
+        + _pin(52, 78)
+        + _pin(100, 62)
+        + _pin(148, 84, 'var(--orange)')
+        + _pin(192, 66)
+        + _pin(126, 128)
+    ))
+
+
+def workflow():
+    """For pharmacies: the request screen, a signature, a confirmation."""
+    return _wrap('Illustration of an appointment request being signed off', (
+        '<rect x="34" y="20" width="150" height="104" rx="10" '
+        'fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.38)" stroke-width="3"/>'
+        + '<rect x="48" y="36" width="62" height="7" rx="3.5" fill="rgba(255,255,255,.75)"/>'
+        + '<rect x="48" y="52" width="108" height="5" rx="2.5" fill="rgba(255,255,255,.28)"/>'
+        + '<rect x="48" y="64" width="88" height="5" rx="2.5" fill="rgba(255,255,255,.28)"/>'
+        # signature over its line
+        + '<path class="art-lift" d="M50 96c8-12 13 6 20-2s10-14 17-4 12 10 20 2" '
+          'fill="none" stroke="var(--orange)" stroke-width="3.5" stroke-linecap="round"/>'
+        + '<rect x="48" y="104" width="90" height="3" rx="1.5" fill="rgba(255,255,255,.30)"/>'
+        # confirmation
+        + '<circle cx="184" cy="104" r="22" fill="var(--orange)"/>'
+        + '<path d="M174 104l7 7 13-14" fill="none" stroke="#012A45" stroke-width="4" '
+          'stroke-linecap="round" stroke-linejoin="round"/>'
+    ), bg='transparent')
+
+
 ART = {
     'clinic': clinic,
     'telehealth': telehealth,
     'pharmacy': pharmacy,
+    'meds': meds,
+    'map': map_pins,
+    'workflow': workflow,
 }
 
 

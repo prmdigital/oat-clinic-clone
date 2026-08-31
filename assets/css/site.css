@@ -475,6 +475,24 @@ body.no-scroll{overflow:hidden;}
   transition:border-color .2s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease);
 }
 .soft:hover{border-color:var(--blue-tint);box-shadow:var(--shadow);transform:translateY(-3px);}
+/* Section mark: one illustration centred above a section heading. */
+.sec-art{max-width:250px;margin:0 auto 26px;line-height:0;}
+.sec-art .art{width:100%;height:auto;display:block;}
+
+/* Column art: drops into the space a shorter column already leaves empty,
+   so no copy or control moves to make room for it. */
+.side-art{margin-top:clamp(26px,3vw,40px);max-width:360px;line-height:0;}
+.side-art .art{width:100%;height:auto;display:block;}
+.side-art.on-dark .art{max-width:320px;}
+
+/* The hover lift belongs to the cards. Elsewhere the art holds still, since
+   there is nothing to hover. */
+.sec-art .art-lift,.side-art .art-lift{transition:none;}
+
+@media (max-width:900px){
+  .side-art{max-width:300px;}
+}
+
 /* Illustration plate. Homepage only, so the rest of the site is untouched.
    The artwork sits on its own tinted panel with the card padding pulled back,
    which is what makes it read as an illustration rather than a big icon. */
