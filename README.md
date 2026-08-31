@@ -173,6 +173,22 @@ removed.
 exception, and its sixth cell links to the index rather than adding a sixth
 item.
 
+### Illustration
+
+Homepage only, in `tools/illustrations.py`. Places and objects, never
+characters or faces. The rules are documented at the top of that file.
+
+The hero background is the one piece worth explaining. It draws a signal that
+starts volatile and decays until it runs flat, which is what opioid agonist
+treatment does to a blood level. The methadone page already says it in words:
+instead of the sharp rise and fall that drives the cycle of using, the level
+stays flat. Three incommensurate frequencies keep the curve irregular so it
+does not read as a sine wave or an ECG trace, and the amplitude decay is
+deterministic, so every build draws the same line.
+
+It sits in the lower band of the hero, clear of the copy, is masked to fade at
+both edges, and carries `aria-hidden` because it is decoration.
+
 ### Type
 
 | Role | Face | Weight |

@@ -20,6 +20,8 @@ House rules for this set:
 These are inline SVG, so they cost no extra request and inherit the palette.
 """
 
+import math
+
 _OPEN = ('<svg class="art" viewBox="0 0 240 150" role="img" '
          'aria-label="{alt}" xmlns="http://www.w3.org/2000/svg">'
          '<rect width="240" height="150" rx="14" fill="{bg}"/>')
@@ -174,6 +176,63 @@ def workflow():
         + '<path d="M174 104l7 7 13-14" fill="none" stroke="#012A45" stroke-width="4" '
           'stroke-linecap="round" stroke-linejoin="round"/>'
     ), bg='transparent')
+
+
+# --------------------------------------------------------------------------- #
+# Hero background
+# --------------------------------------------------------------------------- #
+
+_HERO_W, _HERO_H, _HERO_MID = 1440.0, 240.0, 172.0
+_HERO_A0, _HERO_DECAY = 64.0, 330.0
+
+
+def _signal_points(phase=0.0, step=6):
+    """A volatile signal whose amplitude decays until it runs flat.
+
+    This is the one idea the whole clinic rests on, and the treatment pages
+    already say it in words: instead of the sharp rise and fall that drives
+    the cycle of using, the level in your blood stays flat. Drawn rather than
+    written, it gives the hero a background that means something instead of a
+    decorative gradient.
+
+    Three incommensurate frequencies keep it irregular, so it reads as a
+    signal settling rather than as a sine wave or an ECG trace. Deterministic,
+    so every build produces the same curve.
+    """
+    pts = []
+    x = 0.0
+    while x <= _HERO_W:
+        amp = _HERO_A0 * math.exp(-x / _HERO_DECAY)
+        w = (math.sin(x / 37.0 + phase)
+             + 0.62 * math.sin(x / 16.3 + 1.2 + phase)
+             + 0.33 * math.sin(x / 71.0 + 0.4 + phase)) / 1.95
+        pts.append((x, _HERO_MID - amp * w))
+        x += step
+    return pts
+
+
+def _path(pts):
+    return 'M' + ' L'.join('%.1f %.1f' % (x, y) for x, y in pts)
+
+
+def hero_signal():
+    """Full bleed hero background. Decorative, so it is hidden from readers."""
+    main = _signal_points()
+    echo = _signal_points(phase=2.1)
+    area = _path(main) + ' L%.0f %.0f L0 %.0f Z' % (_HERO_W, _HERO_H, _HERO_H)
+    return (
+        '<svg class="hero-signal" viewBox="0 0 1440 240" preserveAspectRatio="none" '
+        'aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">'
+        # the ground the line settles onto
+        '<path d="%s" fill="var(--blue)" opacity=".075"/>' % area
+        # a fainter echo, for depth
+        + '<path d="%s" fill="none" stroke="var(--blue)" stroke-opacity=".13" '
+          'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' % _path(echo)
+        # the signal itself
+        + '<path d="%s" fill="none" stroke="var(--blue)" stroke-opacity=".26" '
+          'stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' % _path(main)
+        + '</svg>'
+    )
 
 
 ART = {

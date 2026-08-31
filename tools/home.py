@@ -21,10 +21,12 @@ def build_home():
     from content.data import SITE, LOCATIONS
     from content.treatments import TREATMENTS
     from content.posts import POSTS
+    from illustrations import art, hero_signal
 
     # ---------------------------------------------------------------- hero
     hero = '''
 <section class="hero">
+  <div class="hero-art">{art}</div>
   <div class="wrap reveal stagger">
     <h1>Treatment that starts <span class="hl">today</span>, not next month.</h1>
     <p class="lede">Methadone, Suboxone and substance use care, in person or by
@@ -35,7 +37,8 @@ def build_home():
     </div>
     <p class="hero-note">Already a patient? <a href="/locations/">Find your clinic</a></p>
   </div>
-</section>'''.format(ph=SITE['main_phone_href'], phi=icon('phone', 17), phone=SITE['main_phone'])
+</section>'''.format(ph=SITE['main_phone_href'], phi=icon('phone', 17),
+                     phone=SITE['main_phone'], art=hero_signal())
 
     # --------------------------------------------------------------- proof
     proof_items = [
@@ -47,8 +50,6 @@ def build_home():
     proof = '<div class="proof"><div class="wrap">{0}</div></div>'.format(
         ''.join('<div class="proof-item">{ic}<span>{t}</span></div>'.format(
             ic=icon(k, 19), t=esc(t)) for k, t in proof_items))
-
-    from illustrations import art
 
     # ------------------------------------------------------- three ways in
     ways = [
