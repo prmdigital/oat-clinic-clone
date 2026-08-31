@@ -49,12 +49,14 @@ def build_home():
             ic=icon(k, 19), t=esc(t)) for k, t in proof_items))
 
     # ------------------------------------------------------- three ways in
+    from illustrations import art
+
     ways = [
         ('clinic', False, 'Walk into a clinic',
          'Five locations across the Lower Mainland. Assessment and, where appropriate, '
          'a first dose the same day.',
          '/locations/', 'Find your clinic'),
-        ('video', True, 'Start by telemedicine',
+        ('telehealth', True, 'Start by telemedicine',
          'See a physician from home or anywhere private. No travel, and no waiting room.',
          '/what-to-expect/', 'How it works'),
         ('pharmacy', False, 'Ask at your pharmacy',
@@ -63,13 +65,13 @@ def build_home():
          '/for-pharmacies/', 'For pharmacy teams'),
     ]
     ways_html = ''.join('''
-      <div class="soft{acc}">
-        <span class="ico">{ic}</span>
+      <div class="soft has-art">
+        <div class="soft-art">{ic}</div>
         <h3>{t}</h3>
         <p>{d}</p>
         <a class="link-arrow" href="{h}">{cta} {ar}</a>
-      </div>'''.format(acc=' accent' if accent else '', ic=icon(k, 26, 1.6),
-                       t=esc(t), d=esc(d), h=h, cta=esc(cta), ar=icon('arrow', 15))
+      </div>'''.format(ic=art(k), t=esc(t), d=esc(d), h=h, cta=esc(cta),
+                       ar=icon('arrow', 15))
         for k, accent, t, d, h, cta in ways)
 
     three_ways = '''
