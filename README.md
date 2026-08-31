@@ -178,17 +178,18 @@ item.
 Homepage only, in `tools/illustrations.py`. Places and objects, never
 characters or faces. The rules are documented at the top of that file.
 
-The hero is dark, because every interior page already opens on navy and a
-pale homepage hero was the odd one out. A single isometric scene runs along
-its foot showing the three ways in that the page then describes: a home with a
-call arriving, the clinic, and a pharmacy, joined by a dashed path. It is
-masked to fade at both edges and carries `aria-hidden`, since it is
-decoration.
+The hero background moves. Three blurred blobs drift on long, mismatched
+cycles so it never repeats a pose, five clinic pins pulse in sequence, and the
+route joining them has dashes that travel. Read together it is reach: five
+places, one network, care moving between them.
 
-Two earlier attempts are worth recording so they are not retried. A settling
-signal line was too quiet to carry the space on its own. Three solids
-scattered at the edges left the middle of the hero empty. One connected scene
-along the foot solves both.
+Everything animates through CSS, so one media query stops all of it, and the
+rings scale rather than redraw, which keeps them on the compositor.
+
+Three earlier attempts are recorded so they are not retried. A settling signal
+line was too quiet to carry the space. Three solids scattered at the edges
+left the middle empty. A dark ground with a still isometric scene looked
+composed but had no motion at all.
 
 ### Type
 

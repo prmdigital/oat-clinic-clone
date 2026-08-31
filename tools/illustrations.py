@@ -179,78 +179,56 @@ def workflow():
 
 
 # --------------------------------------------------------------------------- #
-# Hero scene
+# Hero field
 # --------------------------------------------------------------------------- #
-# One connected isometric scene rather than objects scattered at the edges.
-# It shows the three ways in that the page goes on to describe: a home with a
-# call, the clinic, and a pharmacy, joined by a path. Drawn for a dark hero,
-# so the palettes are light on navy rather than dark on white.
+# Motion, not another still picture. Five clinics sit on a soft field, each
+# giving off a slow expanding ring, joined by a path whose dashes travel from
+# left to right. Read together it is reach: five places, one network, care
+# moving between them. Nothing here is a loop for its own sake.
+#
+# Everything animates through CSS so a single media query can stop all of it,
+# and the rings scale rather than redraw, which keeps them on the compositor.
 
-def _iso_box(cx, ty, hw, hh, depth, faces):
-    """An isometric box from three faces: light top, mid left, dark right.
+_PIN_X = [168, 452, 720, 1002, 1276]
+_PIN_Y = [188, 154, 132, 160, 194]
+_PIN_DELAY = ['0s', '1.1s', '2.2s', '3.3s', '4.4s']
 
-    cx, ty is the apex of the top face. Shading is what makes these read as
-    solids rather than flat shapes, so every solid in the scene uses the same
-    three face rule.
-    """
-    top, left, right = faces
+
+def _hero_pin(x, y, delay, accent=False):
+    colour = 'var(--orange)' if accent else 'var(--blue)'
     return (
-        '<path d="M{cx} {ty}L{r} {m}L{cx} {b}L{l} {m}Z" fill="{ft}"/>'
-        '<path d="M{l} {m}L{cx} {b}L{cx} {bd}L{l} {md}Z" fill="{fl}"/>'
-        '<path d="M{r} {m}L{cx} {b}L{cx} {bd}L{r} {md}Z" fill="{fr}"/>'
-    ).format(cx=cx, ty=ty, l=cx - hw, r=cx + hw, m=ty + hh, b=ty + 2 * hh,
-             md=ty + hh + depth, bd=ty + 2 * hh + depth,
-             ft=top, fl=left, fr=right)
+        '<g class="pin" style="--d:{d}">'
+        '<circle class="pulse" cx="{x}" cy="{y}" r="15" fill="none" stroke="{c}" '
+        'stroke-width="2"/>'
+        '<circle class="pulse pulse-b" cx="{x}" cy="{y}" r="15" fill="none" stroke="{c}" '
+        'stroke-width="2"/>'
+        '<circle cx="{x}" cy="{y}" r="9.5" fill="{c}"/>'
+        '<circle cx="{x}" cy="{y}" r="3.6" fill="#fff"/>'
+        '</g>'
+    ).format(x=x, y=y, d=delay, c=colour)
 
 
-_PLINTH = ('#0F3A56', '#0B2E45', '#082334')
-_LIGHT = ('#E4F0F8', '#B4D2E7', '#87B2D2')
-_MIDBLUE = ('#5AA3CE', '#2E7BAE', '#1B5B87')
+def hero_field():
+    """Five clinics on a field, pulsing, joined by a travelling path."""
+    pts = list(zip(_PIN_X, _PIN_Y))
+    d = 'M{0} {1}'.format(pts[0][0], pts[0][1])
+    for i in range(1, len(pts)):
+        x0, y0 = pts[i - 1]
+        x1, y1 = pts[i]
+        mx = (x0 + x1) / 2.0
+        d += 'C{0} {1} {2} {3} {4} {5}'.format(mx, y0, mx, y1, x1, y1)
 
-
-def _plinth(cx, ty, hw, hh, depth=13):
-    return _iso_box(cx, ty, hw, hh, depth, _PLINTH)
-
-
-def _dot(cx, cy, r, fill):
-    return '<ellipse cx="%s" cy="%s" rx="%s" ry="%s" fill="%s"/>' % (cx, cy, r, r / 2.0, fill)
-
-
-def hero_scene():
-    """The three ways in, as one isometric scene along the foot of the hero."""
-    out = ['<svg class="hero-scene" viewBox="0 0 1440 300" '
-           'preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false" '
-           'xmlns="http://www.w3.org/2000/svg">']
-
-    # The path linking the three, drawn first so the buildings sit over it.
-    out.append('<path d="M250 232C420 262 540 262 720 224S1030 258 1190 232" '
-               'fill="none" stroke="#2E7BAE" stroke-width="3" stroke-opacity=".55" '
-               'stroke-linecap="round" stroke-dasharray="2 14"/>')
-
-    # 1. Home, with a call coming in.
-    out.append(_plinth(250, 172, 112, 58))
-    out.append(_iso_box(250, 168, 42, 23, 37, _LIGHT))
-    out.append(_dot(250, 191, 11, '#2E7BAE'))
-    out.append(_iso_box(316, 150, 15, 8, 26, _MIDBLUE))
-    out.append(_dot(316, 158, 6, '#E4F0F8'))
-    out.append(_dot(316, 176, 4, '#F47F20'))
-
-    # 2. The clinic, the tallest thing in the scene.
-    out.append(_plinth(720, 150, 132, 68, 15))
-    out.append(_iso_box(720, 118, 56, 30, 58, _MIDBLUE))
-    # sign band and door on the left face
-    out.append('<path d="M664 148L720 178L720 194L664 164Z" fill="#F47F20"/>')
-    out.append('<path d="M690 186L710 197L710 219L690 208Z" fill="#0F3A56" opacity=".55"/>')
-    out.append(_dot(720, 118, 13, '#E4F0F8'))
-
-    # 3. The pharmacy.
-    out.append(_plinth(1190, 172, 112, 58))
-    out.append(_iso_box(1190, 166, 44, 24, 38, _LIGHT))
-    out.append('<path d="M1146 190L1190 214L1190 226L1146 202Z" fill="#F47F20"/>')
-    out.append(_dot(1190, 166, 11, '#2E7BAE'))
-
-    out.append('</svg>')
-    return ''.join(out)
+    return (
+        '<svg class="hero-field" viewBox="0 0 1440 300" preserveAspectRatio="none" '
+        'aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">'
+        # the route between the clinics, dashes travelling along it
+        '<path class="route" d="{d}" fill="none" stroke="var(--blue)" '
+        'stroke-opacity=".28" stroke-width="2.5" stroke-linecap="round" '
+        'stroke-dasharray="2 16"/>'.format(d=d)
+        + ''.join(_hero_pin(x, y, dl, accent=(i == 2))
+                  for i, (x, y, dl) in enumerate(zip(_PIN_X, _PIN_Y, _PIN_DELAY)))
+        + '</svg>'
+    )
 
 
 ART = {

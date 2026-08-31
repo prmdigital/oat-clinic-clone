@@ -405,52 +405,98 @@ p{text-wrap:pretty;}
 body.no-scroll{overflow:hidden;}
 
 /* ---------- 8. Hero ---------- */
-/* The hero is dark. Every interior page already opens on navy, so a white
-   homepage hero was the odd one out, and a pale hero with small objects at
-   the edges left the middle empty. On navy the type carries the space, the
-   scene along the foot reads clearly, and the brand orange finally has
-   somewhere to sit. */
+/* Back to a light ground, with motion instead of a still picture. Three
+   blurred blobs drift on long, mismatched cycles so the background never
+   repeats a pose; five clinic pins pulse in sequence; and the route between
+   them has dashes that travel. It reads as reach rather than decoration.
+   All of it stops under prefers-reduced-motion. */
 .hero{
-  position:relative;overflow:hidden;
-  background:
-    radial-gradient(85% 70% at 78% 6%, rgba(1,95,156,.55) 0%, rgba(1,95,156,0) 62%),
-    radial-gradient(70% 62% at 10% 94%, rgba(244,127,32,.15) 0%, rgba(244,127,32,0) 60%),
-    linear-gradient(168deg, #073E5D 0%, #012A45 100%);
-  border-bottom:1px solid rgba(255,255,255,.09);
+  position:relative;overflow:hidden;background:var(--white);
+  border-bottom:1px solid var(--line);
 }
 .hero .wrap{
   position:relative;z-index:1;text-align:center;
-  padding-top:clamp(52px,7vw,104px);
-  padding-bottom:clamp(150px,20vw,268px);
+  padding-top:clamp(52px,7vw,100px);
+  padding-bottom:clamp(140px,17vw,240px);
   max-width:1000px;
 }
-.hero h1{color:#fff;margin-bottom:22px;}
-.hero h1 .hl{color:var(--orange);}
+.hero h1{margin-bottom:22px;}
+.hero h1 .hl{color:var(--blue);}
 .hero .lede{
-  margin-inline:auto;margin-bottom:34px;color:#BCD6E6;
+  margin-inline:auto;margin-bottom:34px;
   font-size:clamp(17.5px,1.6vw,20.5px);max-width:56ch;
 }
 .hero .btn-row{justify-content:center;margin-bottom:22px;}
 .hero-note{
-  font-size:14.5px;color:#8FB4CC;
+  font-size:14.5px;color:var(--ink-3);
   display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
 }
 .hero-note a{
-  color:#fff;font-weight:600;
-  text-decoration:underline;text-underline-offset:3px;
-  text-decoration-color:rgba(255,255,255,.4);
+  color:var(--blue);font-weight:600;
+  text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2);
 }
-.hero-note a:hover{text-decoration-color:#fff;}
+.hero-note a:hover{text-decoration-color:var(--blue);}
 
-/* The scene sits along the foot, full bleed, behind the copy. */
-.hero-art{
+.hero-art{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+
+/* Ambient drift. Blurred colour, moved only with transform so it stays on the
+   compositor, on three long cycles that do not share a common multiple. */
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(70px);opacity:.5;
+  animation:blob-drift 26s ease-in-out infinite alternate;
+}
+.blob-a{
+  width:46vw;height:34vw;left:-8vw;top:-10vw;
+  background:radial-gradient(circle,rgba(1,95,156,.34),rgba(1,95,156,0) 70%);
+}
+.blob-b{
+  width:40vw;height:30vw;right:-6vw;top:-6vw;
+  background:radial-gradient(circle,rgba(244,127,32,.26),rgba(244,127,32,0) 70%);
+  animation-duration:34s;animation-delay:-9s;
+}
+.blob-c{
+  width:52vw;height:26vw;left:22vw;bottom:-12vw;
+  background:radial-gradient(circle,rgba(1,95,156,.22),rgba(1,95,156,0) 70%);
+  animation-duration:41s;animation-delay:-17s;
+}
+@keyframes blob-drift{
+  0%{transform:translate3d(0,0,0) scale(1);}
+  50%{transform:translate3d(4vw,3vw,0) scale(1.12);}
+  100%{transform:translate3d(-3vw,5vw,0) scale(.94);}
+}
+
+/* The clinic field along the foot of the hero. */
+.hero-field{
   position:absolute;left:0;right:0;bottom:0;
-  height:clamp(150px,20vw,272px);
-  pointer-events:none;z-index:0;
+  width:100%;height:clamp(140px,17vw,244px);display:block;
   -webkit-mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
   mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
 }
-.hero-scene{width:100%;height:100%;display:block;}
+
+/* Rings expand from each pin in turn. Scaling a circle about its own box is
+   a transform, so this does not force layout on every frame. */
+.pulse{
+  transform-box:fill-box;transform-origin:center;
+  animation:pin-pulse 4.4s ease-out infinite;
+  animation-delay:var(--d,0s);
+  opacity:0;
+}
+.pulse-b{animation-delay:calc(var(--d,0s) + 1.5s);}
+@keyframes pin-pulse{
+  0%{transform:scale(.35);opacity:.55;}
+  70%{opacity:0;}
+  100%{transform:scale(2.9);opacity:0;}
+}
+
+/* Dashes run along the route, so care visibly moves between the clinics. */
+.route{animation:route-travel 2.4s linear infinite;}
+@keyframes route-travel{to{stroke-dashoffset:-18;}}
+
+@media (prefers-reduced-motion:reduce){
+  .blob,.pulse,.route{animation:none;}
+  .pulse{opacity:.22;}
+}
 
 /* ---------- 8b. Proof strip ---------- */
 .proof{

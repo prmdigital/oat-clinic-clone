@@ -21,24 +21,29 @@ def build_home():
     from content.data import SITE, LOCATIONS
     from content.treatments import TREATMENTS
     from content.posts import POSTS
-    from illustrations import art, hero_scene
+    from illustrations import art, hero_field
 
     # ---------------------------------------------------------------- hero
     hero = '''
 <section class="hero">
-  <div class="hero-art">{art}</div>
+  <div class="hero-art" aria-hidden="true">
+    <span class="blob blob-a"></span>
+    <span class="blob blob-b"></span>
+    <span class="blob blob-c"></span>
+    {art}
+  </div>
   <div class="wrap reveal stagger">
     <h1>Treatment that starts <span class="hl">today</span>, not next month.</h1>
     <p class="lede">Methadone, Suboxone and substance use care, in person or by
       telemedicine.</p>
     <div class="btn-row">
-      <a class="btn btn-white" href="{ph}">{phi} Call {phone}</a>
-      <a class="btn btn-ghost" href="/contact/">Request a callback</a>
+      <a class="btn btn-primary" href="{ph}">{phi} Call {phone}</a>
+      <a class="btn btn-outline" href="/contact/">Request a callback</a>
     </div>
     <p class="hero-note">Already a patient? <a href="/locations/">Find your clinic</a></p>
   </div>
 </section>'''.format(ph=SITE['main_phone_href'], phi=icon('phone', 17),
-                     phone=SITE['main_phone'], art=hero_scene())
+                     phone=SITE['main_phone'], art=hero_field())
 
     # --------------------------------------------------------------- proof
     proof_items = [
