@@ -8,9 +8,9 @@ Edit here, run `python tools/build.py`, commit the generated HTML.
 SITE = {
     "name": "OAT Clinic",
     "legal_name": "OAT Clinic",
-    "tagline": "Opioid agonist treatment across the Lower Mainland",
+    "tagline": "Opioid agonist treatment across British Columbia",
     "description": (
-        "Same day methadone and Suboxone treatment across five BC Lower Mainland "
+        "Same day methadone and Suboxone treatment across five British Columbia "
         "clinics. In clinic, by telemedicine, or through your pharmacy. No referral."
     ),
     # Origin plus any sub path the site is served from. Drives canonical
@@ -102,7 +102,7 @@ LOCATIONS = [
               "and help you sort out coverage afterwards. It also helps to know the name "
               "and address of the pharmacy you would like to use."]),
             ("Do you take patients who are not from Vancouver?",
-             ["Yes. Patients travel to us from across the Lower Mainland, and we regularly "
+             ["Yes. Patients travel to us from across the region, and we regularly "
               "arrange for people assessed in Vancouver to have their medication dispensed "
               "at a pharmacy closer to home."]),
         ],

@@ -124,7 +124,7 @@ def make_og(tile):
     logo = tile.resize((190, 190), Image.LANCZOS)
     card.paste(logo, (86, 96))
     d.text((86, 330), 'Opioid agonist treatment', font=_font(52, False), fill=(196, 222, 238))
-    d.text((86, 396), 'across the Lower Mainland', font=_font(52, False), fill=(196, 222, 238))
+    d.text((86, 396), 'across British Columbia', font=_font(52, False), fill=(196, 222, 238))
     d.text((86, 486), 'Same day assessment  \u00b7  No referral  \u00b7  Five BC clinics',
            font=_font(30, True), fill=ORANGE)
     return card

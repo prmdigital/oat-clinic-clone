@@ -552,7 +552,7 @@ def build_404():
         '<p>Methadone, Suboxone, substance use care, benzodiazepine support and nicotine '
         'cessation.</p></div></a>'
         '<a class="card" href="/locations/"><div class="card-body"><h3>Locations</h3>'
-        '<p>Five clinics across the Lower Mainland, with hours, directions and phone '
+        '<p>Five clinics across British Columbia, with hours, directions and phone '
         'numbers.</p></div></a>'
         '<a class="card" href="/what-to-expect/"><div class="card-body"><h3>What to expect</h3>'
         '<p>What happens at a first appointment, and what the first weeks are actually '

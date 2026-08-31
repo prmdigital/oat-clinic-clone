@@ -21,31 +21,24 @@ def build_home():
     from content.data import SITE, LOCATIONS
     from content.treatments import TREATMENTS
     from content.posts import POSTS
-    from illustrations import (art, hero_signal, iso_bottle, iso_screen,
-                               iso_stack)
+    from illustrations import art, hero_scene
 
     # ---------------------------------------------------------------- hero
     hero = '''
 <section class="hero">
-  <div class="hero-art">
-    <div class="hero-signal-wrap">{art}</div>
-    <span class="hero-obj obj-bottle">{o1}</span>
-    <span class="hero-obj obj-screen">{o2}</span>
-    <span class="hero-obj obj-stack">{o3}</span>
-  </div>
+  <div class="hero-art">{art}</div>
   <div class="wrap reveal stagger">
     <h1>Treatment that starts <span class="hl">today</span>, not next month.</h1>
     <p class="lede">Methadone, Suboxone and substance use care, in person or by
       telemedicine.</p>
     <div class="btn-row">
-      <a class="btn btn-primary" href="{ph}">{phi} Call {phone}</a>
-      <a class="btn btn-outline" href="/contact/">Request a callback</a>
+      <a class="btn btn-white" href="{ph}">{phi} Call {phone}</a>
+      <a class="btn btn-ghost" href="/contact/">Request a callback</a>
     </div>
     <p class="hero-note">Already a patient? <a href="/locations/">Find your clinic</a></p>
   </div>
 </section>'''.format(ph=SITE['main_phone_href'], phi=icon('phone', 17),
-                     phone=SITE['main_phone'], art=hero_signal(),
-                     o1=iso_bottle(), o2=iso_screen(), o3=iso_stack())
+                     phone=SITE['main_phone'], art=hero_scene())
 
     # --------------------------------------------------------------- proof
     proof_items = [
@@ -61,7 +54,7 @@ def build_home():
     # ------------------------------------------------------- three ways in
     ways = [
         ('clinic', False, 'Walk into a clinic',
-         'Five locations across the Lower Mainland. Assessment and, where appropriate, '
+         'Five locations across British Columbia. Assessment and, where appropriate, '
          'a first dose the same day.',
          '/locations/', 'Find your clinic'),
         ('telehealth', True, 'Start by telemedicine',
@@ -163,7 +156,7 @@ def build_home():
   <div class="wrap">
     <div class="grid-2" style="align-items:center;gap:clamp(32px,5vw,72px);">
       <div class="reveal">
-        <h2>Five clinics across the Lower Mainland</h2>
+        <h2>Five clinics across British Columbia</h2>
         <p class="lede" style="margin-top:18px;">Every location offers assessment,
           prescribing and follow up. Your medication can be dispensed at whichever
           pharmacy suits you.</p>

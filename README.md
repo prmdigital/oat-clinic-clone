@@ -1,7 +1,7 @@
 # OAT Clinic website
 
 Static, multi-page website for OAT Clinic, an opioid agonist treatment provider
-with five clinics across the BC Lower Mainland.
+with five clinics across British Columbia.
 
 Plain HTML and CSS with a small amount of progressive-enhancement JavaScript.
 No frameworks, no npm, no build step for whoever hosts it. Pages are generated
@@ -178,16 +178,17 @@ item.
 Homepage only, in `tools/illustrations.py`. Places and objects, never
 characters or faces. The rules are documented at the top of that file.
 
-The hero background is the one piece worth explaining. It draws a signal that
-starts volatile and decays until it runs flat, which is what opioid agonist
-treatment does to a blood level. The methadone page already says it in words:
-instead of the sharp rise and fall that drives the cycle of using, the level
-stays flat. Three incommensurate frequencies keep the curve irregular so it
-does not read as a sine wave or an ECG trace, and the amplitude decay is
-deterministic, so every build draws the same line.
+The hero is dark, because every interior page already opens on navy and a
+pale homepage hero was the odd one out. A single isometric scene runs along
+its foot showing the three ways in that the page then describes: a home with a
+call arriving, the clinic, and a pharmacy, joined by a dashed path. It is
+masked to fade at both edges and carries `aria-hidden`, since it is
+decoration.
 
-It sits in the lower band of the hero, clear of the copy, is masked to fade at
-both edges, and carries `aria-hidden` because it is decoration.
+Two earlier attempts are worth recording so they are not retried. A settling
+signal line was too quiet to carry the space on its own. Three solids
+scattered at the edges left the middle of the hero empty. One connected scene
+along the foot solves both.
 
 ### Type
 

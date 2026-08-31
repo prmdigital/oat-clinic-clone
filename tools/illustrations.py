@@ -179,78 +179,20 @@ def workflow():
 
 
 # --------------------------------------------------------------------------- #
-# Hero background
+# Hero scene
 # --------------------------------------------------------------------------- #
-
-_HERO_W, _HERO_H, _HERO_MID = 1440.0, 240.0, 172.0
-_HERO_A0, _HERO_DECAY = 64.0, 330.0
-
-
-def _signal_points(phase=0.0, step=6):
-    """A volatile signal whose amplitude decays until it runs flat.
-
-    This is the one idea the whole clinic rests on, and the treatment pages
-    already say it in words: instead of the sharp rise and fall that drives
-    the cycle of using, the level in your blood stays flat. Drawn rather than
-    written, it gives the hero a background that means something instead of a
-    decorative gradient.
-
-    Three incommensurate frequencies keep it irregular, so it reads as a
-    signal settling rather than as a sine wave or an ECG trace. Deterministic,
-    so every build produces the same curve.
-    """
-    pts = []
-    x = 0.0
-    while x <= _HERO_W:
-        amp = _HERO_A0 * math.exp(-x / _HERO_DECAY)
-        w = (math.sin(x / 37.0 + phase)
-             + 0.62 * math.sin(x / 16.3 + 1.2 + phase)
-             + 0.33 * math.sin(x / 71.0 + 0.4 + phase)) / 1.95
-        pts.append((x, _HERO_MID - amp * w))
-        x += step
-    return pts
-
-
-def _path(pts):
-    return 'M' + ' L'.join('%.1f %.1f' % (x, y) for x, y in pts)
-
-
-def hero_signal():
-    """Full bleed hero background. Decorative, so it is hidden from readers."""
-    main = _signal_points()
-    echo = _signal_points(phase=2.1)
-    area = _path(main) + ' L%.0f %.0f L0 %.0f Z' % (_HERO_W, _HERO_H, _HERO_H)
-    return (
-        '<svg class="hero-signal" viewBox="0 0 1440 240" preserveAspectRatio="none" '
-        'aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">'
-        # the ground the line settles onto
-        '<path d="%s" fill="var(--blue)" opacity=".075"/>' % area
-        # a fainter echo, for depth
-        + '<path d="%s" fill="none" stroke="var(--blue)" stroke-opacity=".13" '
-          'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' % _path(echo)
-        # the signal itself
-        + '<path d="%s" fill="none" stroke="var(--blue)" stroke-opacity=".26" '
-          'stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' % _path(main)
-        + '</svg>'
-    )
-
-
-# --------------------------------------------------------------------------- #
-# Hero objects
-# --------------------------------------------------------------------------- #
-# Isometric solids, built from three faces each: a light top, a mid left and a
-# dark right. Real shading rather than a flat icon, so they read dimensional
-# without needing a 3D library or a raster render. Each floats on a slow loop
-# and carries a CSS drop shadow, which is what sells the depth.
-
-# top, left, right
-_BLUE_FACES = ('#4A93C1', '#015F9C', '#01486F')
-_ORANGE_FACES = ('#F9A55F', '#F47F20', '#C4620F')
-_PALE_FACES = ('#FFFFFF', '#E3EFF7', '#C4DCEC')
-
+# One connected isometric scene rather than objects scattered at the edges.
+# It shows the three ways in that the page goes on to describe: a home with a
+# call, the clinic, and a pharmacy, joined by a path. Drawn for a dark hero,
+# so the palettes are light on navy rather than dark on white.
 
 def _iso_box(cx, ty, hw, hh, depth, faces):
-    """An isometric box. cx, ty is the apex of the top face."""
+    """An isometric box from three faces: light top, mid left, dark right.
+
+    cx, ty is the apex of the top face. Shading is what makes these read as
+    solids rather than flat shapes, so every solid in the scene uses the same
+    three face rule.
+    """
     top, left, right = faces
     return (
         '<path d="M{cx} {ty}L{r} {m}L{cx} {b}L{l} {m}Z" fill="{ft}"/>'
@@ -261,58 +203,54 @@ def _iso_box(cx, ty, hw, hh, depth, faces):
              ft=top, fl=left, fr=right)
 
 
-def iso_bottle():
-    """A dosing bottle. The object the whole service hands over."""
-    return (
-        '<svg class="obj" viewBox="0 0 150 190" aria-hidden="true" '
-        'focusable="false" xmlns="http://www.w3.org/2000/svg">'
-        + _iso_box(75, 96, 46, 25, 58, _BLUE_FACES)
-        + _iso_box(75, 52, 22, 12, 34, _ORANGE_FACES)
-        # label wrapped across the two visible body faces
-        + '<path d="M29 139L75 165L75 143L29 117Z" fill="#FFFFFF" opacity=".92"/>'
-        + '<path d="M121 139L75 165L75 143L121 117Z" fill="#EAF3F9" opacity=".92"/>'
-        + '<path d="M38 133L64 148" stroke="#9FC3DA" stroke-width="4" '
-          'stroke-linecap="round"/>'
-        + '<path d="M38 124L56 134" stroke="#BBD6E7" stroke-width="4" '
-          'stroke-linecap="round"/>'
-        + '</svg>'
-    )
+_PLINTH = ('#0F3A56', '#0B2E45', '#082334')
+_LIGHT = ('#E4F0F8', '#B4D2E7', '#87B2D2')
+_MIDBLUE = ('#5AA3CE', '#2E7BAE', '#1B5B87')
 
 
-def iso_screen():
-    """A tablet lying flat, mid appointment.
-
-    The first attempt floated the screen as a separate plane above the base
-    and read as two unconnected diamonds. Everything now sits coplanar with
-    the top face of one slab, which is what makes it a single object. A circle
-    on a 2:1 isometric plane projects to an ellipse of half the height, so the
-    caller is drawn with ry exactly half of rx.
-    """
-    return (
-        '<svg class="obj" viewBox="0 0 180 150" aria-hidden="true" '
-        'focusable="false" xmlns="http://www.w3.org/2000/svg">'
-        + _iso_box(90, 34, 68, 37, 15, _PALE_FACES)
-        # screen inset into the top face
-        + '<path d="M90 46L143 71L90 96L37 71Z" fill="#015F9C"/>'
-        # the caller, featureless, foreshortened onto the same plane
-        + '<ellipse cx="90" cy="65" rx="9" ry="4.5" fill="#EAF3F9"/>'
-        + '<ellipse cx="90" cy="79" rx="17" ry="8.5" fill="#EAF3F9"/>'
-        + '<ellipse cx="90" cy="88" rx="7" ry="3.5" fill="#F47F20"/>'
-        + '</svg>'
-    )
+def _plinth(cx, ty, hw, hh, depth=13):
+    return _iso_box(cx, ty, hw, hh, depth, _PLINTH)
 
 
-def iso_stack():
-    """Three slabs stacked. Doses, and the take home ones that follow."""
-    return (
-        '<svg class="obj" viewBox="0 0 130 150" aria-hidden="true" '
-        'focusable="false" xmlns="http://www.w3.org/2000/svg">'
-        + _iso_box(65, 74, 44, 24, 11, _PALE_FACES)
-        + _iso_box(65, 54, 44, 24, 11, _PALE_FACES)
-        + _iso_box(65, 34, 44, 24, 11, _BLUE_FACES)
-        + '<ellipse cx="65" cy="58" rx="9" ry="4.5" fill="#F47F20"/>'
-        + '</svg>'
-    )
+def _dot(cx, cy, r, fill):
+    return '<ellipse cx="%s" cy="%s" rx="%s" ry="%s" fill="%s"/>' % (cx, cy, r, r / 2.0, fill)
+
+
+def hero_scene():
+    """The three ways in, as one isometric scene along the foot of the hero."""
+    out = ['<svg class="hero-scene" viewBox="0 0 1440 300" '
+           'preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false" '
+           'xmlns="http://www.w3.org/2000/svg">']
+
+    # The path linking the three, drawn first so the buildings sit over it.
+    out.append('<path d="M250 232C420 262 540 262 720 224S1030 258 1190 232" '
+               'fill="none" stroke="#2E7BAE" stroke-width="3" stroke-opacity=".55" '
+               'stroke-linecap="round" stroke-dasharray="2 14"/>')
+
+    # 1. Home, with a call coming in.
+    out.append(_plinth(250, 172, 112, 58))
+    out.append(_iso_box(250, 168, 42, 23, 37, _LIGHT))
+    out.append(_dot(250, 191, 11, '#2E7BAE'))
+    out.append(_iso_box(316, 150, 15, 8, 26, _MIDBLUE))
+    out.append(_dot(316, 158, 6, '#E4F0F8'))
+    out.append(_dot(316, 176, 4, '#F47F20'))
+
+    # 2. The clinic, the tallest thing in the scene.
+    out.append(_plinth(720, 150, 132, 68, 15))
+    out.append(_iso_box(720, 118, 56, 30, 58, _MIDBLUE))
+    # sign band and door on the left face
+    out.append('<path d="M664 148L720 178L720 194L664 164Z" fill="#F47F20"/>')
+    out.append('<path d="M690 186L710 197L710 219L690 208Z" fill="#0F3A56" opacity=".55"/>')
+    out.append(_dot(720, 118, 13, '#E4F0F8'))
+
+    # 3. The pharmacy.
+    out.append(_plinth(1190, 172, 112, 58))
+    out.append(_iso_box(1190, 166, 44, 24, 38, _LIGHT))
+    out.append('<path d="M1146 190L1190 214L1190 226L1146 202Z" fill="#F47F20"/>')
+    out.append(_dot(1190, 166, 11, '#2E7BAE'))
+
+    out.append('</svg>')
+    return ''.join(out)
 
 
 ART = {

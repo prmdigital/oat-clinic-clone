@@ -336,7 +336,7 @@ def build_treatments_index():
     write('/treatments/', render(
         '/treatments/', 'Treatment Programmes',
         'Methadone, Suboxone, substance use treatment, benzodiazepine support and nicotine '
-        'cessation across five clinics in the BC Lower Mainland.',
+        'cessation across five clinics in British Columbia.',
         body, active='treatments', crumb_items=crumb_items))
 
 
@@ -506,7 +506,7 @@ def build_locations_index():
 
     body = pagehead(
         crumbs(crumb_items),
-        'Five clinics across the Lower Mainland',
+        'Five clinics across British Columbia',
         'Vancouver, Abbotsford, Surrey, Burnaby and Chilliwack. Every location offers '
         'assessment, prescribing and follow up, and your medication can be dispensed at '
         'whichever pharmacy is most convenient for you.',
@@ -870,7 +870,7 @@ def build_post(post):
         phone=SITE['main_phone'], related=related, more=more,
         emergency=emergency_note(),
         cta=cta_band('Ready when you are.',
-                     'Same day assessment across five Lower Mainland clinics.'),
+                     'Same day assessment across five British Columbia clinics.'),
     )
 
     canonical = SITE['base_url'] + path

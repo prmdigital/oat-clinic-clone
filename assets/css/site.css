@@ -405,96 +405,52 @@ p{text-wrap:pretty;}
 body.no-scroll{overflow:hidden;}
 
 /* ---------- 8. Hero ---------- */
-/* One idea per screen. The hero carries a headline, a single line of
-   explanation and two actions. The callback form lives on /contact/ so it
-   does not compete with the message here. */
+/* The hero is dark. Every interior page already opens on navy, so a white
+   homepage hero was the odd one out, and a pale hero with small objects at
+   the edges left the middle empty. On navy the type carries the space, the
+   scene along the foot reads clearly, and the brand orange finally has
+   somewhere to sit. */
 .hero{
-  position:relative;overflow:hidden;background:var(--white);
-  border-bottom:1px solid var(--line);
-}
-.hero::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
+  position:relative;overflow:hidden;
   background:
-    radial-gradient(58% 62% at 14% 6%, rgba(1,95,156,.10) 0%, rgba(1,95,156,0) 62%),
-    radial-gradient(52% 58% at 88% 22%, rgba(244,127,32,.11) 0%, rgba(244,127,32,0) 60%),
-    radial-gradient(80% 60% at 50% 100%, rgba(1,95,156,.06) 0%, rgba(1,95,156,0) 68%);
+    radial-gradient(85% 70% at 78% 6%, rgba(1,95,156,.55) 0%, rgba(1,95,156,0) 62%),
+    radial-gradient(70% 62% at 10% 94%, rgba(244,127,32,.15) 0%, rgba(244,127,32,0) 60%),
+    linear-gradient(168deg, #073E5D 0%, #012A45 100%);
+  border-bottom:1px solid rgba(255,255,255,.09);
 }
-/* Hero background. A signal that starts volatile and settles flat, which is
-   what opioid agonist treatment actually does to a blood level. It sits in
-   the lower band so it never crosses the headline, and it is decorative, so
-   it carries aria-hidden and no text depends on it. */
-.hero-art{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.hero-signal-wrap{
-  position:absolute;left:0;right:0;bottom:0;
-  height:clamp(124px,18vh,190px);
-  -webkit-mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent);
-  mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent);
-}
-.hero-signal{width:100%;height:100%;display:block;}
-
-/* Isometric solids flanking the headline. Three shaded faces each rather than
-   a flat icon, plus a soft drop shadow, which is what actually sells the
-   depth. They flank the text column and never enter it: below 1240px there is
-   no longer room beside the copy, so they are removed rather than shrunk. */
-.hero-obj{
-  position:absolute;display:block;line-height:0;
-  filter:drop-shadow(0 20px 26px rgba(1,42,69,.20));
-  animation:obj-float 7s ease-in-out infinite;
-}
-.hero-obj .obj{display:block;width:100%;height:auto;}
-.obj-bottle{left:1.5%;top:25%;width:clamp(96px,9vw,138px);animation-delay:-.4s;}
-.obj-screen{right:1%;top:19%;width:clamp(104px,10vw,150px);animation-delay:-2.6s;
-            animation-duration:8.5s;}
-.obj-stack{right:1.5%;bottom:14%;width:clamp(84px,7.5vw,116px);animation-delay:-4.9s;
-           animation-duration:9.5s;}
-
-@keyframes obj-float{
-  0%,100%{transform:translate3d(0,0,0);}
-  50%{transform:translate3d(0,-12px,0);}
-}
-
-/* Below this the text column leaves no clear margin beside it, so the
-   objects are removed rather than allowed to sit under the copy. */
-@media (max-width:1320px){
-  .hero-obj{display:none;}
-}
-@media (prefers-reduced-motion:reduce){
-  .hero-obj{animation:none;}
-}
-
 .hero .wrap{
   position:relative;z-index:1;text-align:center;
-  padding-top:clamp(48px,6vw,88px);
-  padding-bottom:clamp(84px,9vw,132px);
+  padding-top:clamp(52px,7vw,104px);
+  padding-bottom:clamp(150px,20vw,268px);
   max-width:1000px;
 }
-.hero h1{margin-bottom:22px;}
-.hero h1 .hl{color:var(--blue);}
+.hero h1{color:#fff;margin-bottom:22px;}
+.hero h1 .hl{color:var(--orange);}
 .hero .lede{
-  margin-inline:auto;margin-bottom:34px;
+  margin-inline:auto;margin-bottom:34px;color:#BCD6E6;
   font-size:clamp(17.5px,1.6vw,20.5px);max-width:56ch;
 }
 .hero .btn-row{justify-content:center;margin-bottom:22px;}
 .hero-note{
-  font-size:14.5px;color:var(--ink-3);
+  font-size:14.5px;color:#8FB4CC;
   display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
 }
 .hero-note a{
-  color:var(--blue);font-weight:600;
-  text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2);
+  color:#fff;font-weight:600;
+  text-decoration:underline;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.4);
 }
-.hero-note a:hover{text-decoration-color:var(--blue);}
+.hero-note a:hover{text-decoration-color:#fff;}
 
-/* A single quiet badge above the headline. */
-.hero-badge{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:13.5px;font-weight:600;color:var(--blue);
-  background:var(--blue-tint);border-radius:var(--radius-pill);
-  padding:8px 18px;margin-bottom:26px;
+/* The scene sits along the foot, full bleed, behind the copy. */
+.hero-art{
+  position:absolute;left:0;right:0;bottom:0;
+  height:clamp(150px,20vw,272px);
+  pointer-events:none;z-index:0;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
 }
-.hero-badge .dot{
-  width:7px;height:7px;border-radius:50%;background:var(--orange);flex:none;
-}
+.hero-scene{width:100%;height:100%;display:block;}
 
 /* ---------- 8b. Proof strip ---------- */
 .proof{

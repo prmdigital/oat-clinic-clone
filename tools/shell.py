@@ -133,7 +133,7 @@ def organization_node():
         "description": SITE['description'],
         "telephone": SITE['main_phone'],
         "email": SITE['email'],
-        "areaServed": {"@type": "AdministrativeArea", "name": "Lower Mainland, British Columbia"},
+        "areaServed": {"@type": "AdministrativeArea", "name": "British Columbia"},
         "medicalSpecialty": "Addiction Medicine",
         "location": [{"@id": SITE['base_url'] + '/locations/' + l['slug'] + '/#clinic'}
                      for l in LOCATIONS],
@@ -298,7 +298,7 @@ def footer():
         <span class="wordmark foot">
           <img src="/assets/img/logo-light.png" alt="OAT Clinic" width="93" height="44">
         </span>
-        <p class="foot-desc">Opioid agonist treatment across the Lower Mainland. In clinic,
+        <p class="foot-desc">Opioid agonist treatment across British Columbia. In clinic,
           by telemedicine, and through the pharmacy you already use.</p>
         <div class="foot-phones">
           <a href="tel:+16046706580"><span class="c">Vancouver</span><span class="n">604-670-6580</span></a>
@@ -391,7 +391,7 @@ PAGE = '''<!DOCTYPE html>
 <meta property="og:image" content="{ogimage}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="OAT Clinic. Opioid agonist treatment across the Lower Mainland.">
+<meta property="og:image:alt" content="OAT Clinic. Opioid agonist treatment across British Columbia.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
