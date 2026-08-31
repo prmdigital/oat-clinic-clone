@@ -21,12 +21,18 @@ def build_home():
     from content.data import SITE, LOCATIONS
     from content.treatments import TREATMENTS
     from content.posts import POSTS
-    from illustrations import art, hero_signal
+    from illustrations import (art, hero_signal, iso_bottle, iso_screen,
+                               iso_stack)
 
     # ---------------------------------------------------------------- hero
     hero = '''
 <section class="hero">
-  <div class="hero-art">{art}</div>
+  <div class="hero-art">
+    <div class="hero-signal-wrap">{art}</div>
+    <span class="hero-obj obj-bottle">{o1}</span>
+    <span class="hero-obj obj-screen">{o2}</span>
+    <span class="hero-obj obj-stack">{o3}</span>
+  </div>
   <div class="wrap reveal stagger">
     <h1>Treatment that starts <span class="hl">today</span>, not next month.</h1>
     <p class="lede">Methadone, Suboxone and substance use care, in person or by
@@ -38,7 +44,8 @@ def build_home():
     <p class="hero-note">Already a patient? <a href="/locations/">Find your clinic</a></p>
   </div>
 </section>'''.format(ph=SITE['main_phone_href'], phi=icon('phone', 17),
-                     phone=SITE['main_phone'], art=hero_signal())
+                     phone=SITE['main_phone'], art=hero_signal(),
+                     o1=iso_bottle(), o2=iso_screen(), o3=iso_stack())
 
     # --------------------------------------------------------------- proof
     proof_items = [

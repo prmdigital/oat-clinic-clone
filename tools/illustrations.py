@@ -235,6 +235,86 @@ def hero_signal():
     )
 
 
+# --------------------------------------------------------------------------- #
+# Hero objects
+# --------------------------------------------------------------------------- #
+# Isometric solids, built from three faces each: a light top, a mid left and a
+# dark right. Real shading rather than a flat icon, so they read dimensional
+# without needing a 3D library or a raster render. Each floats on a slow loop
+# and carries a CSS drop shadow, which is what sells the depth.
+
+# top, left, right
+_BLUE_FACES = ('#4A93C1', '#015F9C', '#01486F')
+_ORANGE_FACES = ('#F9A55F', '#F47F20', '#C4620F')
+_PALE_FACES = ('#FFFFFF', '#E3EFF7', '#C4DCEC')
+
+
+def _iso_box(cx, ty, hw, hh, depth, faces):
+    """An isometric box. cx, ty is the apex of the top face."""
+    top, left, right = faces
+    return (
+        '<path d="M{cx} {ty}L{r} {m}L{cx} {b}L{l} {m}Z" fill="{ft}"/>'
+        '<path d="M{l} {m}L{cx} {b}L{cx} {bd}L{l} {md}Z" fill="{fl}"/>'
+        '<path d="M{r} {m}L{cx} {b}L{cx} {bd}L{r} {md}Z" fill="{fr}"/>'
+    ).format(cx=cx, ty=ty, l=cx - hw, r=cx + hw, m=ty + hh, b=ty + 2 * hh,
+             md=ty + hh + depth, bd=ty + 2 * hh + depth,
+             ft=top, fl=left, fr=right)
+
+
+def iso_bottle():
+    """A dosing bottle. The object the whole service hands over."""
+    return (
+        '<svg class="obj" viewBox="0 0 150 190" aria-hidden="true" '
+        'focusable="false" xmlns="http://www.w3.org/2000/svg">'
+        + _iso_box(75, 96, 46, 25, 58, _BLUE_FACES)
+        + _iso_box(75, 52, 22, 12, 34, _ORANGE_FACES)
+        # label wrapped across the two visible body faces
+        + '<path d="M29 139L75 165L75 143L29 117Z" fill="#FFFFFF" opacity=".92"/>'
+        + '<path d="M121 139L75 165L75 143L121 117Z" fill="#EAF3F9" opacity=".92"/>'
+        + '<path d="M38 133L64 148" stroke="#9FC3DA" stroke-width="4" '
+          'stroke-linecap="round"/>'
+        + '<path d="M38 124L56 134" stroke="#BBD6E7" stroke-width="4" '
+          'stroke-linecap="round"/>'
+        + '</svg>'
+    )
+
+
+def iso_screen():
+    """A tablet lying flat, mid appointment.
+
+    The first attempt floated the screen as a separate plane above the base
+    and read as two unconnected diamonds. Everything now sits coplanar with
+    the top face of one slab, which is what makes it a single object. A circle
+    on a 2:1 isometric plane projects to an ellipse of half the height, so the
+    caller is drawn with ry exactly half of rx.
+    """
+    return (
+        '<svg class="obj" viewBox="0 0 180 150" aria-hidden="true" '
+        'focusable="false" xmlns="http://www.w3.org/2000/svg">'
+        + _iso_box(90, 34, 68, 37, 15, _PALE_FACES)
+        # screen inset into the top face
+        + '<path d="M90 46L143 71L90 96L37 71Z" fill="#015F9C"/>'
+        # the caller, featureless, foreshortened onto the same plane
+        + '<ellipse cx="90" cy="65" rx="9" ry="4.5" fill="#EAF3F9"/>'
+        + '<ellipse cx="90" cy="79" rx="17" ry="8.5" fill="#EAF3F9"/>'
+        + '<ellipse cx="90" cy="88" rx="7" ry="3.5" fill="#F47F20"/>'
+        + '</svg>'
+    )
+
+
+def iso_stack():
+    """Three slabs stacked. Doses, and the take home ones that follow."""
+    return (
+        '<svg class="obj" viewBox="0 0 130 150" aria-hidden="true" '
+        'focusable="false" xmlns="http://www.w3.org/2000/svg">'
+        + _iso_box(65, 74, 44, 24, 11, _PALE_FACES)
+        + _iso_box(65, 54, 44, 24, 11, _PALE_FACES)
+        + _iso_box(65, 34, 44, 24, 11, _BLUE_FACES)
+        + '<ellipse cx="65" cy="58" rx="9" ry="4.5" fill="#F47F20"/>'
+        + '</svg>'
+    )
+
+
 ART = {
     'clinic': clinic,
     'telehealth': telehealth,
