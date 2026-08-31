@@ -205,9 +205,22 @@ p{text-wrap:pretty;}
   transition:background-color .18s var(--ease),color .18s var(--ease),
              border-color .18s var(--ease),transform .18s var(--ease);
 }
-.btn:active{transform:translateY(1px);}
+/* Tactile press, adapted from Duolingo's chunky button. Theirs uses a 4px
+   ledge with uppercase text, which reads playful. Ours is 3px, sentence case
+   and in brand colours, so it reads solid and dependable rather than game
+   like. The ledge is a box-shadow, not a border, so it never affects layout.
+   Worth having for its own sake: a button that visibly responds to touch is
+   easier to use for someone unwell, cold or shaking. */
+.btn{--ledge:transparent;box-shadow:0 3px 0 0 var(--ledge);}
+.btn:active{transform:translateY(3px);box-shadow:0 0 0 0 var(--ledge);}
+.btn-primary{--ledge:var(--blue-3);}
+.btn-blue{--ledge:var(--blue-3);}
+.btn-accent{--ledge:var(--orange-deep);}
+.btn-white{--ledge:rgba(1,42,69,.35);}
+.btn-outline{--ledge:var(--line-2);}
+.btn-ghost{--ledge:rgba(255,255,255,.22);}
 .btn svg{flex:none;}
-.btn-primary{background:var(--blue);color:var(--white);box-shadow:var(--shadow-sm);}
+.btn-primary{background:var(--blue);color:var(--white);}
 .btn-primary:hover{background:var(--blue-2);color:var(--white);}
 .btn-blue{background:var(--blue);color:var(--white);}
 .btn-blue:hover{background:var(--blue-2);}
@@ -217,7 +230,7 @@ p{text-wrap:pretty;}
 .btn-ghost:hover{border-color:var(--ink-inv);background:rgba(255,255,255,.07);}
 /* The one orange button on the page: the persistent masthead CTA. Navy text
    because white on brand orange is 2.66:1 and fails AA. */
-.btn-accent{background:var(--orange);color:var(--orange-ink);box-shadow:var(--shadow-sm);}
+.btn-accent{background:var(--orange);color:var(--orange-ink);}
 .btn-accent:hover{background:var(--orange-2);color:var(--orange-ink);}
 .btn-white{background:var(--paper);color:var(--blue-2);}
 .btn-white:hover{background:var(--white);}
@@ -606,6 +619,17 @@ body.no-scroll{overflow:hidden;}
 .field .err{
   display:none;font-size:13px;color:#A33A2A;margin-top:5px;font-weight:500;
 }
+/* A quiet tick once a field is valid. Duolingo celebrates a correct answer;
+   here the job is only to reassure someone that the form is working. */
+.field{position:relative;}
+.field.is-valid input,.field.is-valid select{
+  border-color:var(--sage);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='%233F6357' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m20 6-11 11-5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:42px;
+}
+.field.is-valid select{background-position:right 38px center;padding-right:64px;}
 .field.is-invalid input,.field.is-invalid select{border-color:#C0503C;background:#FDF4F2;}
 .field.is-invalid .err{display:block;}
 .callback .btn{width:100%;margin-top:6px;}

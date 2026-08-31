@@ -249,6 +249,10 @@
       if (!rule) return true;
       var message = rule(input.value, field);
       field.classList.toggle('is-invalid', Boolean(message));
+      // Only mark valid once something has actually been entered, so an empty
+      // form does not open covered in ticks.
+      var filled = input.type === 'checkbox' ? input.checked : String(input.value).trim() !== '';
+      field.classList.toggle('is-valid', !message && filled);
       var err = field.querySelector('.err');
       if (err) err.textContent = message;
       input.setAttribute('aria-invalid', message ? 'true' : 'false');
