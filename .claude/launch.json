@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "oat-clinic-static",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-c",
+        "import os, functools; from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler; port = int(os.environ.get('PORT', '8080')); handler = functools.partial(SimpleHTTPRequestHandler, directory=r'C:\\Users\\user\\AppData\\Local\\Temp\\claude\\C--Oat-Clinic-Clone\\4c7169ca-7a76-4b0e-b33c-ef5224126226\\scratchpad\\serve'); ThreadingHTTPServer(('', port), handler).serve_forever()"
+      ],
+      "port": 4180,
+      "autoPort": true
+    }
+  ]
+}
