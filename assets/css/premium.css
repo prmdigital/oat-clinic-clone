@@ -742,20 +742,44 @@ html.gsap-motion.js .reveal.stagger > *{
 
 
 
-/* ---------- Stacked journey: the line runs vertically with the dot ---------- */
+/* ---------- Stacked journey: a true vertical timeline ---------- */
 @media (max-width:720px){
-  .steps-3:has(.journey-dot) .step::before{display:none;}   /* horizontal rules off */
+  .steps-3:has(.journey-dot) .step{
+    padding-top:0;
+    padding-left:36px;
+  }
+  .steps-3:has(.journey-dot) .step::before{display:none;}  /* horizontal rules off */
   .steps-3:has(.journey-dot)::after{
     content:"";
     position:absolute;
-    left:7px;                          /* centred under the travelling dot */
-    top:6px;
-    bottom:6px;
+    left:10px;                      /* centred under badges and dot */
+    top:10px;
+    bottom:10px;
     width:0;
     border-left:2px dashed var(--line-2);
   }
-  /* number labels keep their paper backing so they punch through the line */
-  .steps-3:has(.journey-dot) .step{padding-left:24px;}
-  .steps-3:has(.journey-dot) .step::after{z-index:1;left:0;}
-  .steps-3:has(.journey-dot) .journey-dot{z-index:2;}
+  /* Numbers become solid badges pinned on the line, level with headings */
+  .steps-3:has(.journey-dot) .step::after{
+    top:1px;
+    left:-1px;
+    width:24px;
+    height:24px;
+    padding:0;
+    border-radius:50%;
+    background:var(--white);
+    border:1.5px solid var(--orange-deep);
+    display:grid;
+    place-items:center;
+    font-size:11px;
+    line-height:1;
+    z-index:2;
+  }
+  .steps-3:has(.journey-dot) .step h3{margin-top:0;}
+  .steps-3:has(.journey-dot) .journey-dot{
+    top:0;
+    left:6px;                       /* ride the line, slip under badges */
+    width:10px;
+    height:10px;
+    z-index:1;
+  }
 }

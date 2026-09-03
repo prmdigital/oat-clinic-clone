@@ -163,7 +163,7 @@
       var stops = Array.prototype.map.call(items, function (st) {
         return horizontal
           ? { x: st.offsetLeft + 2, y: 0 }
-          : { x: st.offsetLeft + 2, y: st.offsetTop };
+          : { x: 0, y: st.offsetTop + 8 };
       });
       tl = gsap.timeline({
         repeat: -1,
