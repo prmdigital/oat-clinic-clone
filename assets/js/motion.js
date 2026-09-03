@@ -145,6 +145,54 @@
     });
   });
 
+  /* ---------- Opening hours: today highlighted, live open/closed pill ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.hours-table'), function (table) {
+    var names = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var now = new Date();
+    var today = names[now.getDay()];
+    var todayText = null;
+    var rows = table.querySelectorAll('tr');
+
+    Array.prototype.forEach.call(rows, function (r) {
+      var th = r.querySelector('th');
+      if (th && th.textContent.trim() === today) {
+        r.classList.add('is-today');
+        todayText = (r.querySelector('td') || {}).textContent || '';
+      }
+    });
+
+    gsap.from(rows, {
+      opacity: 0, x: 16, duration: 0.35, stagger: 0.05, ease: 'power1.out',
+      scrollTrigger: { trigger: table, start: 'top 88%', once: true }
+    });
+
+    // Live pill beside the section heading.
+    var h2 = table.parentElement.querySelector('h2');
+    if (!h2 || todayText === null) return;
+    function minutes(str) {
+      var m = str.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+      if (!m) return null;
+      var h = parseInt(m[1], 10) % 12 + (/pm/i.test(m[3]) ? 12 : 0);
+      return h * 60 + parseInt(m[2], 10);
+    }
+    var open = false, label = 'Closed today';
+    var parts = todayText.split(/\s+to\s+/i);
+    if (parts.length === 2) {
+      var a = minutes(parts[0]), b = minutes(parts[1]);
+      var cur = now.getHours() * 60 + now.getMinutes();
+      if (a !== null && b !== null) {
+        open = cur >= a && cur < b;
+        label = open ? 'Open now, closes ' + parts[1].trim()
+                     : 'Closed now, opens at ' + parts[0].trim();
+      }
+    }
+    var pill = document.createElement('span');
+    pill.className = 'open-pill' + (open ? ' is-open' : '');
+    pill.textContent = label;
+    h2.insertAdjacentElement('afterend', pill);
+    gsap.from(pill, { opacity: 0, y: 8, duration: 0.4, ease: 'power1.out', delay: 0.3 });
+  });
+
   /* ---------- Journey dot: travels the how-it-works line ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.steps-3'), function (steps) {
     var items = steps.querySelectorAll('.step');

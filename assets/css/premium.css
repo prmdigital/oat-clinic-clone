@@ -873,3 +873,83 @@ html.gsap-motion.js .reveal.stagger > *{
 /* 3D pin scene inside location headers, behind content */
 .pagehead-loc .section-3d{z-index:0;}
 .pagehead-loc .wrap{position:relative;z-index:1;}
+
+
+/* ---------- Opening hours: today glows, status is live ---------- */
+.hours-table tr{transition:background .2s var(--ease);}
+.hours-table tr:hover{background:rgba(1,95,156,.035);}
+.hours-table tr.is-today th,
+.hours-table tr.is-today td{
+  color:var(--ink);
+  font-weight:600;
+}
+.hours-table tr.is-today th{
+  position:relative;
+  padding-left:14px;
+}
+.hours-table tr.is-today th::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:4px;
+  height:60%;
+  border-radius:2px;
+  background:linear-gradient(180deg,var(--orange),var(--orange-2));
+}
+.hours-table tr.is-today{background:rgba(244,127,32,.05);}
+.open-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  padding:7px 15px;
+  border-radius:var(--radius-pill);
+  font-size:13.5px;
+  font-weight:600;
+  background:rgba(11,58,93,.06);
+  color:var(--ink-2);
+  border:1px solid rgba(11,58,93,.1);
+}
+.open-pill::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--ink-3);
+}
+.open-pill.is-open{
+  background:#E7F6EE;
+  color:#1C6B45;
+  border-color:#BFE5D0;
+}
+.open-pill.is-open::before{
+  background:#2E9E6B;
+  box-shadow:0 0 0 0 rgba(46,158,107,.4);
+  animation:hero-live 2.6s var(--ease) infinite;
+}
+
+/* ---------- "What this location offers": a card that feels considered ---------- */
+.band-tint .keypoints{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  box-shadow:var(--shadow-soft);
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.band-tint .keypoints::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--orange));
+}
+.band-tint .keypoints:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-soft-lg);
+}
+@media (prefers-reduced-motion:reduce){
+  .band-tint .keypoints:hover{transform:none;}
+  .open-pill.is-open::before{animation:none;}
+}
