@@ -137,6 +137,14 @@
     });
   });
 
+  /* ---------- Location facts tick in ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.loc-facts'), function (el) {
+    gsap.from(el.children, {
+      opacity: 0, y: 20, scale: 0.96, duration: 0.45, stagger: 0.08, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 92%', once: true }
+    });
+  });
+
   /* ---------- Journey dot: travels the how-it-works line ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.steps-3'), function (steps) {
     var items = steps.querySelectorAll('.step');

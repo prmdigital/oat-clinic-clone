@@ -338,14 +338,8 @@ h1 em,h2 em{font-style:italic;font-weight:500;}
 .pagehead::after{
   background:radial-gradient(80% 110% at 82% -10%, rgba(244,127,32,.07) 0%, rgba(244,127,32,0) 60%);
 }
-.pagehead::before{
-  content:"";
-  position:absolute;
-  left:0;right:0;bottom:0;
-  height:2px;
-  background:linear-gradient(90deg,transparent,rgba(1,95,156,.25) 30%,rgba(244,127,32,.35) 50%,rgba(1,95,156,.25) 70%,transparent);
-  z-index:2;
-}
+.pagehead{border-bottom:none;}
+.pagehead::before{content:none;}
 .pagehead .wrap{padding-block:clamp(18px,2.2vw,32px) clamp(44px,5.5vw,80px);}
 .pagehead .crumbs{margin-bottom:clamp(18px,2.5vw,34px);}
 .pagehead h1{
@@ -697,4 +691,58 @@ html.gsap-motion.js .reveal.stagger > *{
 .loc-decor .blob-a,.loc-decor .blob-b{transform:none;}
 @media (prefers-reduced-motion:reduce){
   .loc-decor .pin-mark,.loc-decor .blob-a,.loc-decor .blob-b{animation:none;}
+}
+
+
+/* ---------- Location detail refinements ---------- */
+/* Map fills its column instead of leaving dead space beneath */
+.grid-2 .map-frame{
+  aspect-ratio:auto;
+  height:100%;
+  min-height:380px;
+}
+
+/* Facts strip: iconed, lifted, alive */
+.loc-facts{gap:14px;}
+.loc-fact{
+  border:1px solid rgba(11,58,93,.08);
+  border-radius:16px;
+  box-shadow:var(--shadow-soft);
+  position:relative;
+  overflow:hidden;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+}
+.loc-fact::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--orange));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s var(--ease);
+}
+.loc-fact:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-soft-lg);
+  border-color:rgba(1,95,156,.25);
+}
+.loc-fact:hover::before{transform:scaleX(1);}
+.fact-ico{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:30px;
+  height:30px;
+  border-radius:9px;
+  background:var(--blue-tint);
+  color:var(--blue);
+  margin-right:9px;
+  vertical-align:middle;
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.loc-fact:hover .fact-ico{background:var(--blue);color:#fff;}
+.loc-fact .k{display:flex;align-items:center;}
+@media (prefers-reduced-motion:reduce){
+  .loc-fact:hover{transform:none;}
 }
