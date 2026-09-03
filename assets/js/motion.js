@@ -158,9 +158,12 @@
     var tl;
     function build() {
       if (tl) tl.kill();
-      // Rest a beat on each stage, then glide to the next.
+      // Columns on desktop, stacked on mobile; the dot follows either way.
+      var horizontal = Math.abs(items[1].offsetTop - items[0].offsetTop) < 10;
       var stops = Array.prototype.map.call(items, function (st) {
-        return st.offsetLeft + 2;
+        return horizontal
+          ? { x: st.offsetLeft + 2, y: 0 }
+          : { x: st.offsetLeft + 2, y: st.offsetTop };
       });
       tl = gsap.timeline({
         repeat: -1,
@@ -171,10 +174,10 @@
           toggleActions: 'play pause resume pause'
         }
       });
-      tl.set(dot, { x: stops[0], opacity: 0 })
+      tl.set(dot, { x: stops[0].x, y: stops[0].y, opacity: 0 })
         .to(dot, { opacity: 1, duration: 0.4 })
-        .to(dot, { x: stops[1], duration: 1.4, ease: 'power1.inOut' }, '+=0.9')
-        .to(dot, { x: stops[2], duration: 1.4, ease: 'power1.inOut' }, '+=0.9')
+        .to(dot, { x: stops[1].x, y: stops[1].y, duration: 1.4, ease: 'power1.inOut' }, '+=0.9')
+        .to(dot, { x: stops[2].x, y: stops[2].y, duration: 1.4, ease: 'power1.inOut' }, '+=0.9')
         .to(dot, { opacity: 0, duration: 0.5 }, '+=0.9');
     }
     build();
