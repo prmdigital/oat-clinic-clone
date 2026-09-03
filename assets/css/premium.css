@@ -784,3 +784,26 @@ html.gsap-motion.js .reveal.stagger > *{
     z-index:1;
   }
 }
+
+
+/* ---------- WinRx band: structured split with a glass workflow panel ---------- */
+.band-dark .split{align-items:center;}
+.band-dark .split-list{
+  gap:0;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:20px;
+  padding:clamp(10px,1.6vw,18px) clamp(20px,2.6vw,32px);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 24px 60px -30px rgba(0,0,0,.5);
+}
+.band-dark .split-list li{
+  padding-block:clamp(14px,1.8vw,20px);
+  border-top:1px solid rgba(255,255,255,.09);
+}
+.band-dark .split-list li:first-child{border-top:0;}
+.band-dark .split-list li::before{
+  top:50%;
+  transform:translateY(-50%);
+}
