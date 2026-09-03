@@ -854,3 +854,17 @@ html.gsap-motion.js .reveal.stagger > *{
 @media (prefers-reduced-motion:reduce){
   .getting-item:hover{transform:none;}
 }
+
+
+/* ---------- Minimal 3D backdrop for content sections ---------- */
+.has-3d{position:relative;overflow:hidden;}
+.has-3d .wrap{position:relative;z-index:1;}
+.section-3d{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s var(--ease);
+}
+.section-3d.is-ready{opacity:1;}
+.section-3d canvas{position:absolute;inset:0;width:100%;height:100%;}
