@@ -807,3 +807,50 @@ html.gsap-motion.js .reveal.stagger > *{
   top:50%;
   transform:translateY(-50%);
 }
+
+
+/* ---------- Getting here: iconed feature rows beside a framed map ---------- */
+.grid-2 .map-frame{
+  border:0;
+  border-radius:20px;
+  box-shadow:var(--shadow-soft-lg);
+}
+.getting-list{
+  display:grid;
+  gap:14px;
+  margin-top:22px;
+}
+.getting-item{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  padding:18px 20px;
+  background:var(--white);
+  border:1px solid rgba(11,58,93,.08);
+  border-radius:16px;
+  box-shadow:var(--shadow-soft);
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+}
+.getting-item:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-soft-lg);
+  border-color:rgba(1,95,156,.22);
+}
+.get-ico{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:var(--blue-tint);
+  color:var(--blue);
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.getting-item:hover .get-ico{background:var(--blue);color:#fff;}
+.getting-item h3{font-size:16.5px;margin:2px 0 4px;}
+.getting-item p{font-size:15px;line-height:1.6;color:var(--ink-2);margin:0;}
+@media (prefers-reduced-motion:reduce){
+  .getting-item:hover{transform:none;}
+}

@@ -121,7 +121,7 @@
   }
 
   /* ---------- Checklists tick in ---------- */
-  Array.prototype.forEach.call(document.querySelectorAll('.keypoints ul'), function (ul) {
+  Array.prototype.forEach.call(document.querySelectorAll('.keypoints ul, .getting-list'), function (ul) {
     gsap.from(ul.children, {
       opacity: 0, x: 14, duration: 0.35, stagger: 0.07, ease: 'power1.out',
       scrollTrigger: { trigger: ul, start: 'top 88%', once: true }
