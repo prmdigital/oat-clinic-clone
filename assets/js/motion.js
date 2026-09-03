@@ -140,7 +140,7 @@
   /* ---------- Location facts tick in ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.loc-facts'), function (el) {
     gsap.from(el.children, {
-      opacity: 0, y: 20, scale: 0.96, duration: 0.45, stagger: 0.08, ease: 'power2.out',
+      opacity: 0, y: 10, duration: 0.35, stagger: 0.06, ease: 'power1.out',
       scrollTrigger: { trigger: el, start: 'top 92%', once: true }
     });
   });
