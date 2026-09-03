@@ -245,6 +245,7 @@ h1 em,h2 em{font-style:italic;font-weight:500;}
   }
   .hero-3d .hero-copy .lede{margin-inline:0;}
   .hero-3d .btn-row{justify-content:flex-start;}
+  .hero-3d .hero-note{justify-content:flex-start;}
   .hero-3d .hero-stats{grid-column:1/-1;}
   .hero-3d h1{font-size:clamp(38px,4.6vw,60px);}
 }
