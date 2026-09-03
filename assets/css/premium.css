@@ -241,7 +241,7 @@ h1 em,h2 em{font-style:italic;font-weight:500;}
     gap:clamp(36px,4.5vw,72px);
     align-items:center;
     text-align:left;
-    max-width:1240px;
+    max-width:1400px;
   }
   .hero-3d .hero-copy .lede{margin-inline:0;}
   .hero-3d .btn-row{justify-content:flex-start;}
