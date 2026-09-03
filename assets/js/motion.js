@@ -160,11 +160,6 @@
       if (tl) tl.kill();
       // Columns on desktop, stacked on mobile; the dot follows either way.
       var horizontal = Math.abs(items[1].offsetTop - items[0].offsetTop) < 10;
-      var stops = Array.prototype.map.call(items, function (st) {
-        return horizontal
-          ? { x: st.offsetLeft + 2, y: 0 }
-          : { x: 0, y: st.offsetTop + 8 };
-      });
       tl = gsap.timeline({
         repeat: -1,
         repeatDelay: 1.2,
@@ -174,11 +169,29 @@
           toggleActions: 'play pause resume pause'
         }
       });
-      tl.set(dot, { x: stops[0].x, y: stops[0].y, opacity: 0 })
-        .to(dot, { opacity: 1, duration: 0.4 })
-        .to(dot, { x: stops[1].x, y: stops[1].y, duration: 1.4, ease: 'power1.inOut' }, '+=0.9')
-        .to(dot, { x: stops[2].x, y: stops[2].y, duration: 1.4, ease: 'power1.inOut' }, '+=0.9')
-        .to(dot, { opacity: 0, duration: 0.5 }, '+=0.9');
+      if (horizontal) {
+        var xs = Array.prototype.map.call(items, function (st) { return st.offsetLeft + 2; });
+        tl.set(dot, { x: xs[0], y: 0, opacity: 0 })
+          .to(dot, { opacity: 1, duration: 0.4 })
+          .to(dot, { x: xs[1], duration: 1.4, ease: 'power1.inOut' }, '+=0.9')
+          .to(dot, { x: xs[2], duration: 1.4, ease: 'power1.inOut' }, '+=0.9')
+          .to(dot, { opacity: 0, duration: 0.5 }, '+=0.9');
+      } else {
+        // Travel only the gaps between number badges, never across them.
+        var BADGE = 26;
+        var segs = [
+          { from: items[0].offsetTop + BADGE + 2, to: items[1].offsetTop - 14 },
+          { from: items[1].offsetTop + BADGE + 2, to: items[2].offsetTop - 14 }
+        ];
+        tl.set(dot, { x: 0, y: segs[0].from, opacity: 0 })
+          .to(dot, { opacity: 1, duration: 0.3 })
+          .to(dot, { y: segs[0].to, duration: 1.2, ease: 'power1.inOut' }, '+=0.4')
+          .to(dot, { opacity: 0, duration: 0.25 })
+          .set(dot, { y: segs[1].from })
+          .to(dot, { opacity: 1, duration: 0.25 }, '+=0.5')
+          .to(dot, { y: segs[1].to, duration: 1.2, ease: 'power1.inOut' }, '+=0.4')
+          .to(dot, { opacity: 0, duration: 0.3 });
+      }
     }
     build();
     var resizeTimer;
