@@ -137,6 +137,21 @@
     });
   });
 
+  /* ---------- Pack cards and split columns rise in ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.pack-card'), function (el, i) {
+    gsap.from(el, {
+      opacity: 0, y: 26, duration: 0.5, delay: i % 2 * 0.12, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 86%', once: true }
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.split'), function (el) {
+    if (el.closest('.band-dark')) return; // dark band already choreographed
+    gsap.from(el.children, {
+      opacity: 0, y: 22, duration: 0.5, stagger: 0.15, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+    });
+  });
+
   /* ---------- Stage cards wave in ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.stage-cards'), function (el) {
     gsap.from(el.children, {
