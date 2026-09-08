@@ -137,6 +137,16 @@
     });
   });
 
+  /* ---------- Stage cards wave in ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.stage-cards'), function (el) {
+    gsap.from(el.children, {
+      opacity: 0, scale: 0.94, y: 18, duration: 0.45,
+      stagger: { each: 0.07, from: 'start', grid: 'auto' },
+      ease: 'back.out(1.3)',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+    });
+  });
+
   /* ---------- Location facts tick in ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.loc-facts'), function (el) {
     gsap.from(el.children, {
