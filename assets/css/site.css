@@ -45,8 +45,8 @@
 
   /* Type. A geometric sans for display gives the friendly, branded feel the
      reference sites have. Inter carries the reading copy. */
-  --display:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --display:'Lexend',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --sans:'Source Sans 3',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
 
   /* Rhythm. Sections breathe more than they did. */
   --gap:clamp(20px,2.4vw,30px);

@@ -6,7 +6,7 @@
    ========================================================================== */
 
 :root{
-  --serif:'Lora',Georgia,'Times New Roman',serif;
+  --serif:'Lexend',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   --mist-1:#F4FAFD;   /* pale sky   */
   --mist-2:#FDFCF9;   /* warm ivory */
   --mist-3:#EAF3F9;   /* deeper mist */
@@ -20,7 +20,7 @@ h1,h2{
   font-weight:600;
   letter-spacing:-.01em;
 }
-h1 em,h2 em{font-style:italic;font-weight:500;}
+h1 em,h2 em{font-style:normal;font-weight:600;}
 
 /* ---------- Immersive hero: luminous, not dark ---------- */
 .hero-3d{
@@ -92,7 +92,7 @@ h1 em,h2 em{font-style:italic;font-weight:500;}
   text-wrap:balance;
 }
 .hero-3d h1 .hl{
-  font-style:italic;
+  font-style:normal;
   font-weight:600;
   background:linear-gradient(94deg,var(--orange-2) 10%,var(--orange-deep) 90%);
   -webkit-background-clip:text;
@@ -169,7 +169,7 @@ h1 em,h2 em{font-style:italic;font-weight:500;}
   color:var(--ink);
   letter-spacing:-.01em;
 }
-.hero-stat .v em{font-style:italic;color:var(--orange-deep);}
+.hero-stat .v em{font-style:normal;color:var(--orange-deep);}
 .hero-stat .k{
   display:block;
   margin-top:7px;
@@ -424,8 +424,8 @@ h1 em,h2 em{font-style:italic;font-weight:500;}
   box-shadow:var(--shadow-soft);
 }
 .row-num{
-  font-family:var(--serif);
-  font-style:italic;
+  font-family:var(--display);
+  font-style:normal;
   color:var(--blue);
   opacity:.65;
   font-weight:600;
@@ -956,3 +956,22 @@ html.gsap-motion.js .reveal.stagger > *{
   .band-tint .keypoints:hover{transform:none;}
   .open-pill.is-open::before{animation:none;}
 }
+
+
+/* ==========================================================================
+   Unified type scale (Lexend headings / Source Sans 3 body)
+   Display: h1 hero > h1 page > h2 > h3. Text: body 17 / support 15 / label 12.5
+   ========================================================================== */
+h1,h2{font-weight:600;letter-spacing:-.015em;}
+h3{font-size:19px;}
+.lede{font-size:clamp(17px,1.4vw,19px);line-height:1.7;}
+.hero-3d h1{font-size:clamp(34px,5vw,58px);line-height:1.1;}
+@media (min-width:981px){
+  .hero-3d h1{font-size:clamp(34px,4.2vw,52px);}
+}
+.pagehead h1{font-size:clamp(30px,3.8vw,46px);}
+.cta-band h2{font-size:clamp(26px,3.2vw,40px);}
+.hero-stat .v{font-weight:600;font-size:clamp(22px,2.2vw,28px);}
+.hero-stat .k,.loc-fact .k,.fact-ico ~ *{letter-spacing:.08em;}
+.getting-item h3,.tile h3,.soft h3{font-size:18px;}
+.getting-item p,.tile p,.soft p,.card p{font-size:15.5px;}
