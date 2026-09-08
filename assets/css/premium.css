@@ -1014,23 +1014,21 @@ body{font-size:19px;}
 .stage-cards .step::after{
   content:counter(stage,decimal-leading-zero);
   position:absolute;
-  top:18px;
-  right:18px;
+  top:22px;
+  right:20px;
   left:auto;
-  display:grid;
-  place-items:center;
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  background:var(--blue-tint);
-  color:var(--blue);
+  width:auto;
+  height:auto;
+  background:none;
+  color:var(--ink-3);
   font-family:var(--display);
-  font-size:15px;
+  font-size:13px;
   font-weight:600;
+  letter-spacing:.08em;
   padding:0;
   margin:0;
 }
-.stage-cards .step h3{padding-right:52px;}
+.stage-cards .step h3{padding-right:44px;}
 .stage-cards .step h3{margin-top:0;}
 
 /* ---------- Packing-list panels ---------- */
@@ -1082,4 +1080,92 @@ body{font-size:19px;}
   object-fit:cover;
   aspect-ratio:16/10;
   display:block;
+}
+
+
+/* ---------- Stage icons: on the left, gently alive ---------- */
+.stage-ico{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  background:var(--blue-tint);
+  color:var(--blue);
+  margin-bottom:14px;
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.stage-ico svg{animation:ico-breathe 3.2s var(--ease) infinite;}
+.stage-cards .step:nth-child(2) .stage-ico svg{animation-delay:.4s;}
+.stage-cards .step:nth-child(3) .stage-ico svg{animation-delay:.8s;}
+.stage-cards .step:nth-child(4) .stage-ico svg{animation-delay:1.2s;}
+.stage-cards .step:nth-child(5) .stage-ico svg{animation-delay:1.6s;}
+.stage-cards .step:nth-child(6) .stage-ico svg{animation-delay:2s;}
+.stage-cards .step:hover .stage-ico{background:var(--blue);color:#fff;}
+@keyframes ico-breathe{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-3px) scale(1.06);}
+}
+
+/* ---------- The short version: an at-a-glance band on dawn watercolor ---------- */
+.glance-band{
+  position:relative;
+  padding-block:clamp(40px,5vw,64px);
+  background:url('/oat-clinic-clone/assets/img/bg-glance.jpg') center/cover no-repeat;
+}
+.glance-band::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(253,252,249,.35);
+}
+.glance-band .wrap{position:relative;z-index:1;}
+.glance-eyebrow{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--orange-deep);
+  margin-bottom:22px;
+}
+.glance-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+}
+.glance-card{
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(11,58,93,.08);
+  border-radius:16px;
+  box-shadow:var(--shadow-soft);
+  padding:20px 18px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease);
+}
+.glance-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft-lg);}
+.glance-ico{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:var(--blue-tint);
+  color:var(--blue);
+  margin-bottom:10px;
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.glance-card:hover .glance-ico{background:var(--blue);color:#fff;}
+.glance-card b{font-family:var(--display);font-size:17.5px;color:var(--ink);font-weight:600;}
+.glance-card span:last-child{font-size:15px;color:var(--ink-2);line-height:1.45;}
+@media (max-width:1100px){.glance-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:640px){.glance-grid{grid-template-columns:repeat(2,1fr);gap:10px;}}
+@media (prefers-reduced-motion:reduce){
+  .stage-ico svg{animation:none;}
+  .glance-card:hover{transform:none;}
 }
