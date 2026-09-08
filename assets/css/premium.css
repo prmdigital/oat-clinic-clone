@@ -201,6 +201,7 @@ h1 em,h2 em{font-style:italic;font-weight:500;}
   display:block;
   aspect-ratio:5/4;
 }
+.hero-card video{aspect-ratio:16/10;}
 .hero-card .chip{
   position:absolute;
   left:14px;
