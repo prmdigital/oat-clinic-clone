@@ -1,8 +1,6 @@
-/* OAT Clinic hero scene: the ribbon.
-   A wide translucent silk ribbon flows diagonally through the hero in true
-   3D, lit softly, its colour graded from brand blue into dawn peach. A few
-   frosted glass spheres drift at different depths for parallax. The mood
-   stays calm; the dimensionality is unmistakable.
+/* OAT Clinic hero scene: frosted spheres.
+   A few softly lit glass spheres drift at different depths behind the
+   hero, giving quiet dimensionality without haze or clutter.
 
    Progressive enhancement only. If WebGL, the CDN, or JS is unavailable the
    hero keeps its CSS gradient and content. Honors prefers-reduced-motion,
@@ -30,7 +28,6 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   host.appendChild(renderer.domElement);
 
   var scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0xfdfcf9, 30, 78);
 
   var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
   camera.position.set(0, 0, 30);
@@ -44,52 +41,6 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   var warm = new THREE.DirectionalLight(0xffe3c4, 0.35);
   warm.position.set(-7, -3, 5);
   scene.add(warm);
-
-  /* ---------- The ribbon: silk in slow motion ---------- */
-  var SEG_X = 180, SEG_Y = 10;
-  var ribbonGeo = new THREE.PlaneGeometry(72, 6.5, SEG_X, SEG_Y);
-  var base = ribbonGeo.attributes.position.array.slice();
-
-  // Colour grades along the length: blue, into mist, into dawn peach.
-  var cA = new THREE.Color(0x8fc1e3);
-  var cB = new THREE.Color(0xe8f2f8);
-  var cC = new THREE.Color(0xf6c99a);
-  var colors = new Float32Array(ribbonGeo.attributes.position.count * 3);
-  var tmp = new THREE.Color();
-  for (var i = 0; i < ribbonGeo.attributes.position.count; i++) {
-    var u = (base[i * 3] + 36) / 72;
-    if (u < 0.55) tmp.copy(cA).lerp(cB, u / 0.55);
-    else tmp.copy(cB).lerp(cC, (u - 0.55) / 0.45);
-    colors[i * 3] = tmp.r; colors[i * 3 + 1] = tmp.g; colors[i * 3 + 2] = tmp.b;
-  }
-  ribbonGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-  var ribbon = new THREE.Mesh(ribbonGeo, new THREE.MeshPhongMaterial({
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.62,
-    side: THREE.DoubleSide,
-    shininess: 90,
-    specular: new THREE.Color(0xffffff),
-    depthWrite: false
-  }));
-  ribbon.position.set(2, -3.4, -7);
-  ribbon.rotation.set(-0.38, 0.08, -0.16);
-  scene.add(ribbon);
-
-  function deformRibbon(t) {
-    var pos = ribbonGeo.attributes.position.array;
-    for (var i = 0; i < ribbonGeo.attributes.position.count; i++) {
-      var x = base[i * 3], y = base[i * 3 + 1];
-      pos[i * 3 + 2] =
-        Math.sin(x * 0.16 + t * 0.45) * 1.7 +
-        Math.sin(x * 0.07 - t * 0.28) * 1.1 +
-        Math.cos(y * 0.7 + t * 0.5) * 0.35;
-      pos[i * 3 + 1] = y + Math.sin(x * 0.05 + t * 0.2) * 0.8;
-    }
-    ribbonGeo.attributes.position.needsUpdate = true;
-    ribbonGeo.computeVertexNormals();
-  }
 
   /* ---------- Frosted spheres at different depths ---------- */
   var SPHERES = [
@@ -134,7 +85,6 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   window.addEventListener('resize', resize);
 
   function drawScene(t) {
-    deformRibbon(t);
     for (var i = 0; i < spheres.length; i++) {
       var s = spheres[i];
       s.mesh.position.y = s.S.y + Math.sin(t * 0.4 + s.S.ph) * s.S.bob;
