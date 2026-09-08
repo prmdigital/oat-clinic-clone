@@ -614,7 +614,8 @@ html.gsap-motion.js .reveal.stagger > *{
   box-shadow:var(--shadow-soft-lg);
   position:relative;
 }
-.photo-figure img{
+.photo-figure img,
+.photo-figure video{
   width:100%;
   height:100%;
   object-fit:cover;
