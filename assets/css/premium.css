@@ -104,7 +104,7 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
   margin-top:24px;
   margin-inline:auto;
   max-width:600px;
-  font-size:clamp(18px,1.5vw,20px);
+  font-size:clamp(19px,1.6vw,21px);
   line-height:1.75;
   color:var(--ink-2);
 }
@@ -963,10 +963,10 @@ html.gsap-motion.js .reveal.stagger > *{
    Display: h1 hero > h1 page > h2 > h3. Text: body 17 / support 15 / label 12.5
    ========================================================================== */
 h1,h2{font-weight:600;letter-spacing:-.015em;}
-h3{font-size:20px;}
+h3{font-size:21px;}
 /* Source Sans 3 runs small on the eye; the reading sizes scale up to match */
-body{font-size:18px;}
-.lede{font-size:clamp(18px,1.5vw,20px);line-height:1.7;}
+body{font-size:19px;}
+.lede{font-size:clamp(19px,1.6vw,21px);line-height:1.7;}
 .hero-3d h1{font-size:clamp(34px,5vw,58px);line-height:1.1;}
 @media (min-width:981px){
   .hero-3d h1{font-size:clamp(34px,4.2vw,52px);}
@@ -975,10 +975,10 @@ body{font-size:18px;}
 .cta-band h2{font-size:clamp(26px,3.2vw,40px);}
 .hero-stat .v{font-weight:600;font-size:clamp(22px,2.2vw,28px);}
 .hero-stat .k,.loc-fact .k,.fact-ico ~ *{letter-spacing:.08em;}
-.getting-item h3,.tile h3,.soft h3{font-size:19px;}
-.getting-item p,.tile p,.soft p,.card p{font-size:16.5px;}
-.step p,.split-list li,.keypoints li,.hours-table,.faq-answer,.prose{font-size:16.5px;}
-.foot-desc,.foot-links{font-size:16px;}
+.getting-item h3,.tile h3,.soft h3{font-size:20px;}
+.getting-item p,.tile p,.soft p,.card p{font-size:17.5px;}
+.step p,.split-list li,.keypoints li,.hours-table,.faq-answer,.prose{font-size:17.5px;}
+.foot-desc,.foot-links{font-size:17px;}
 
 
 /* ---------- What to expect: staged journey as cards ---------- */
