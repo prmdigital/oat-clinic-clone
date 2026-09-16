@@ -1189,5 +1189,8 @@ body{font-size:19px;}
 
 
 /* Section intros breathe full width so short lines stay on one line */
-.sec-head .lede{max-width:none;}
-.sec-head.center .lede{max-width:none;}
+.sec-head{max-width:none;}
+.sec-head .lede,
+.sec-head.center .lede,
+.sec-head-split .lede,
+.section .grid-2 > div > .lede{max-width:none;}
