@@ -104,7 +104,7 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
   margin-top:24px;
   margin-inline:auto;
   max-width:600px;
-  font-size:clamp(19px,1.6vw,21px);
+  font-size:19px;
   line-height:1.75;
   color:var(--ink-2);
 }
@@ -966,7 +966,7 @@ h1,h2{font-weight:600;letter-spacing:-.015em;}
 h3{font-size:21px;}
 /* Source Sans 3 runs small on the eye; the reading sizes scale up to match */
 body{font-size:19px;}
-.lede{font-size:clamp(19px,1.6vw,21px);line-height:1.7;}
+.lede{font-size:19px;line-height:1.7;}
 .hero-3d h1{font-size:clamp(34px,5vw,58px);line-height:1.1;}
 @media (min-width:981px){
   .hero-3d h1{font-size:clamp(34px,4.2vw,52px);}
@@ -1186,3 +1186,8 @@ body{font-size:19px;}
 @media (max-width:1180px){
   .nav-link{font-size:16px;padding-inline:10px;}
 }
+
+
+/* Section intros breathe full width so short lines stay on one line */
+.sec-head .lede{max-width:none;}
+.sec-head.center .lede{max-width:none;}
