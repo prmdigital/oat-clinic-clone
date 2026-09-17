@@ -383,6 +383,11 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
   color:var(--ink);border-color:rgba(11,58,93,.22);background:rgba(255,255,255,.8);
 }
 .pagehead .btn-outline:hover{border-color:var(--blue);color:var(--blue);background:#fff;}
+/* Ghost buttons were styled for the old dark header; on the light one they read as outline */
+.pagehead .btn-ghost{
+  color:var(--ink);border-color:rgba(11,58,93,.22);background:rgba(255,255,255,.8);
+}
+.pagehead .btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:#fff;}
 .pagehead .pill{background:#fff;border:1px solid rgba(11,58,93,.12);color:var(--ink-2);}
 
 /* ---------- Split page heroes: text left, photo card right ---------- */
@@ -1142,7 +1147,6 @@ body{font-size:19px;}
 .glance-band{
   position:relative;
   padding-block:clamp(40px,5vw,64px);
-  margin-bottom:clamp(36px,4.5vw,60px);
   background:url('/oat-clinic-clone/assets/img/bg-glance.jpg') center/cover no-repeat;
 }
 .glance-band::before{
