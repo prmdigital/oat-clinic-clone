@@ -759,8 +759,31 @@ html.gsap-motion.js .reveal.stagger > *{
 .loc-fact .k{
   display:flex;
   align-items:center;
-  font-size:13px;
-  letter-spacing:.08em;
+  font-size:14.5px;
+  letter-spacing:.07em;
+}
+.loc-fact .v{font-size:19px;line-height:1.6;}
+
+/* Contact page: clinics stack as full-width ruled rows */
+.clinic-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+  border-block:0;
+  border-top:1px solid rgba(11,58,93,.12);
+}
+.clinic-list .loc-fact{
+  display:grid;
+  grid-template-columns:128px 1fr;
+  gap:8px 20px;
+  align-items:baseline;
+  border-left:0;
+  padding:18px 0;
+  border-bottom:1px solid rgba(11,58,93,.12);
+}
+.clinic-list .loc-fact:first-child{padding-left:0;}
+@media (max-width:520px){
+  .clinic-list .loc-fact{grid-template-columns:1fr;gap:4px;}
 }
 .fact-ico{
   display:inline-flex;

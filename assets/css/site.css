@@ -164,7 +164,7 @@ p{text-wrap:pretty;}
   color:var(--ink-2);
   max-width:64ch;
 }
-.dek{font-size:16px;color:var(--ink-3);}
+.dek{font-size:19px;color:var(--ink-3);}
 .prose{max-width:68ch;}
 .prose h2{margin-top:1.9em;margin-bottom:.5em;}
 .prose h3{margin-top:1.7em;margin-bottom:.4em;}
@@ -698,7 +698,7 @@ body.no-scroll{overflow:hidden;}
   padding-right:38px;
 }
 .field .err{
-  display:none;font-size:14px;color:#A33A2A;margin-top:5px;font-weight:500;
+  display:none;font-size:15.5px;color:#A33A2A;margin-top:5px;font-weight:500;
 }
 /* A quiet tick once a field is valid. Duolingo celebrates a correct answer;
    here the job is only to reassure someone that the form is working. */
@@ -715,7 +715,7 @@ body.no-scroll{overflow:hidden;}
 .field.is-invalid .err{display:block;}
 .callback .btn{width:100%;margin-top:6px;}
 .form-note{
-  font-size:14px;color:var(--ink-3);line-height:1.5;
+  font-size:15.5px;color:var(--ink-3);line-height:1.5;
   margin-top:14px;text-align:center;
 }
 .form-note a{color:var(--blue);text-decoration:underline;text-underline-offset:2px;}
