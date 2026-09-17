@@ -1096,7 +1096,7 @@ a.card:hover,.card:hover{
 }
 .balance-col h3{font-size:19px;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .balance-col ul{display:grid;gap:11px;}
-.balance-col li{position:relative;padding-left:24px;font-size:16.5px;line-height:1.55;}
+.balance-col li{position:relative;padding-left:24px;font-size:17.5px;line-height:1.6;}
 .balance-col li::before{
   content:'';position:absolute;left:3px;top:.62em;width:6px;height:6px;border-radius:50%;
 }
