@@ -110,7 +110,12 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
 }
 
 .hero-3d .btn-row{margin-top:38px;justify-content:center;}
-.hero-3d .btn{border-radius:var(--radius-pill);padding-inline:28px;}
+.hero-3d .btn{
+  border-radius:var(--radius-pill);
+  padding-block:0;
+  padding-inline:28px;
+  min-height:56px;
+}
 .hero-3d .btn-primary{
   background:var(--blue);
   color:#fff;
@@ -173,11 +178,11 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
 .hero-stat .k{
   display:block;
   margin-top:7px;
-  font-size:12.5px;
+  font-size:14.5px;
   font-weight:600;
-  letter-spacing:.09em;
+  letter-spacing:.05em;
   text-transform:uppercase;
-  color:var(--ink-3);
+  color:var(--ink-2);
 }
 @media (max-width:860px){ .hero-stats{grid-template-columns:repeat(2,1fr);} }
 @media (max-width:480px){ .hero-stats{gap:10px;} .hero-stat{padding:16px 12px 14px;} }
