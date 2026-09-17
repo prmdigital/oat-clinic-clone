@@ -1284,8 +1284,8 @@ body{font-size:19px;}
 .gl-item span{
   display:block;
   margin-top:6px;
-  font-size:17px;
-  line-height:1.5;
+  font-size:19px;
+  line-height:1.55;
   color:var(--ink-2);
 }
 @media (max-width:900px){
