@@ -791,22 +791,23 @@ html.gsap-motion.js .reveal.stagger > *{
   .clinic-list .loc-fact{grid-template-columns:1fr;gap:4px;}
 }
 /* Contact: benefit checkpoints beside the form, reference layout */
+.contact-col{display:flex;flex-direction:column;height:100%;}
 .contact-points{
   list-style:none;
-  margin:28px 0 0;
+  margin:30px 0 0;
   padding:0;
   display:grid;
-  gap:20px;
+  gap:26px;
 }
 .contact-points li{
   display:grid;
-  grid-template-columns:32px 1fr;
-  gap:14px;
+  grid-template-columns:38px 1fr;
+  gap:16px;
   align-items:start;
 }
 .cp-ico{
-  width:30px;
-  height:30px;
+  width:34px;
+  height:34px;
   border-radius:50%;
   background:rgba(244,127,32,.14);
   color:var(--orange-deep);
@@ -817,21 +818,25 @@ html.gsap-motion.js .reveal.stagger > *{
 .contact-points b{
   display:block;
   font-family:var(--display);
-  font-size:19px;
+  font-size:21px;
   font-weight:600;
   color:var(--ink);
 }
 .contact-points li > div > span{
   display:block;
-  margin-top:4px;
-  font-size:15.5px;
+  margin-top:5px;
+  font-size:19px;
   line-height:1.6;
-  color:var(--ink-3);
+  color:var(--ink-2);
 }
 .cp-tel{font-weight:700;color:var(--blue);}
 .cp-tel:hover{color:var(--blue-2);}
-.cp-alt{margin-top:30px;font-size:15.5px;color:var(--ink-3);}
+.cp-alt{margin-top:32px;font-size:19px;color:var(--ink-2);}
 .cp-alt a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;}
+.contact-col .emergency{margin-top:auto;}
+@media (max-width:900px){
+  .contact-col .emergency{margin-top:32px;}
+}
 
 /* Clinic cards */
 .clinic-cards{
