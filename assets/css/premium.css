@@ -1211,6 +1211,53 @@ body{font-size:19px;}
   gap:14px;
 }
 
+/* The process: an editorial numbered timeline, typography does the work */
+.jline{border-top:1px solid rgba(11,58,93,.12);}
+.jstep{
+  display:grid;
+  grid-template-columns:clamp(84px,9vw,128px) 1fr;
+  gap:clamp(18px,3vw,44px);
+  align-items:start;
+  padding-block:clamp(26px,3vw,40px);
+  border-bottom:1px solid rgba(11,58,93,.12);
+}
+.jnum{
+  font-family:var(--serif);
+  font-size:clamp(40px,4.4vw,58px);
+  font-weight:600;
+  line-height:1;
+  letter-spacing:-.02em;
+  color:rgba(1,95,156,.22);
+  font-variant-numeric:tabular-nums;
+  transition:color .3s var(--ease);
+}
+.jstep:hover .jnum{color:var(--orange-deep);}
+.jbody h3{margin:2px 0 8px;font-size:22px;}
+.jbody p{margin:0;font-size:19px;line-height:1.65;color:var(--ink-2);max-width:none;}
+@media (max-width:640px){
+  .jstep{grid-template-columns:64px 1fr;gap:16px;}
+}
+
+/* Ruled editorial columns: strong top rule instead of a card box */
+.pack-plain,
+.pack-plain.pack-card{
+  background:none;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  border-top:2px solid var(--ink);
+  padding:26px 0 0;
+}
+.pack-plain::before{display:none;}
+.keypoints-plain{
+  background:none;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  border-top:2px solid var(--ink);
+  padding:26px 0 0;
+}
+
 /* The short version: one editorial ledger, hairline-divided */
 .glance-ledger{
   display:grid;
@@ -1286,6 +1333,7 @@ body{font-size:19px;}
 
 .pack-card{transition:transform .28s var(--ease), box-shadow .28s var(--ease);}
 .pack-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft-lg);}
+.pack-plain.pack-card:hover{transform:none;box-shadow:none;}
 @media (prefers-reduced-motion:reduce){.pack-card:hover{transform:none;}}
 
 
