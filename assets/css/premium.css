@@ -1044,9 +1044,15 @@ body{font-size:19px;}
 .cta-band h2{font-size:clamp(26px,3.2vw,40px);}
 .hero-stat .v{font-weight:600;font-size:clamp(22px,2.2vw,28px);}
 .hero-stat .k,.loc-fact .k,.fact-ico ~ *{letter-spacing:.08em;}
-.getting-item h3,.tile h3,.soft h3{font-size:20px;}
-.getting-item p,.tile p,.soft p,.card p{font-size:17.5px;}
-.step p,.split-list li,.keypoints li,.hours-table,.faq-answer,.prose{font-size:17.5px;}
+.getting-item h3,.tile h3,.soft h3{font-size:21px;}
+.getting-item p,.tile p,.soft p,.card p{font-size:19px;}
+.step p,.split-list li,.keypoints li,.hours-table,.faq-answer,.prose{font-size:19px;}
+.balance-col li,.tcard p,.tstat .l,.faq-answer p,.faq-answer ul li,.callout p,.col-item p,.row-body p,.card-body p{font-size:19px;}
+.glance-card b{font-size:19.5px;}
+.glance-card span:last-child{font-size:17.5px;}
+.keypoints .h{font-size:14px;}
+.glance-eyebrow{font-size:14.5px;}
+.eyebrow{font-size:13.5px;letter-spacing:.12em;}
 .foot-desc,.foot-links{font-size:17px;}
 
 
@@ -1063,7 +1069,7 @@ body{font-size:19px;}
   overflow:hidden;
   transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
 }
-.stage-cards .step p{font-size:17.5px;line-height:1.62;}
+.stage-cards .step p{font-size:19px;line-height:1.62;}
 .stage-cards .step:hover{
   transform:translateY(-4px);
   box-shadow:var(--shadow-soft-lg);
@@ -1231,8 +1237,8 @@ body{font-size:19px;}
   transition:background .3s var(--ease), color .3s var(--ease);
 }
 .glance-card:hover .glance-ico{background:var(--blue);color:#fff;}
-.glance-card b{font-family:var(--display);font-size:18.5px;color:var(--ink);font-weight:600;}
-.glance-card span:last-child{font-size:17px;color:var(--ink-2);line-height:1.55;}
+.glance-card b{font-family:var(--display);font-size:19.5px;color:var(--ink);font-weight:600;}
+.glance-card span:last-child{font-size:17.5px;color:var(--ink-2);line-height:1.55;}
 @media (max-width:1100px){.glance-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:640px){.glance-grid{grid-template-columns:repeat(2,1fr);gap:10px;}}
 @media (prefers-reduced-motion:reduce){
