@@ -885,9 +885,9 @@ a.card:hover,.card:hover{
 .faq-item[open] .plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0;}
 .faq-answer{padding:0 0 26px;max-width:70ch;}
 .faq-answer > * + *{margin-top:.9em;}
-.faq-answer p{font-size:17px;}
+.faq-answer p{font-size:17.5px;}
 .faq-answer ul{margin-top:.9em;display:grid;gap:.5em;}
-.faq-answer ul li{position:relative;padding-left:22px;font-size:17px;}
+.faq-answer ul li{position:relative;padding-left:22px;font-size:17.5px;}
 .faq-answer ul li::before{
   content:'';position:absolute;left:2px;top:.68em;
   width:5px;height:5px;border-radius:50%;background:var(--orange);
