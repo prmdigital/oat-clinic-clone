@@ -1199,3 +1199,16 @@ body{font-size:19px;}
 .sec-head.center .lede,
 .sec-head-split .lede,
 .section .grid-2 > div > .lede{max-width:none;}
+
+/* Text blocks use the space their column gives them, no character caps */
+.lede,
+.hero .lede,
+.prose,
+.pagehead h1,
+.pagehead-body,
+.row-body p,
+.faq-answer,
+.tstats-note,
+.article-body,
+.foot-desc,
+.foot-disclaimer{max-width:none;}
