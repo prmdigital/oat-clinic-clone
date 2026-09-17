@@ -960,13 +960,13 @@ a.card:hover,.card:hover{
 .doc-nav li{counter-increment:dn;}
 .doc-nav ol a{
   display:block;position:relative;
-  padding:9px 0 9px 28px;font-size:16px;line-height:1.4;
+  padding:9px 0 9px 28px;font-size:17.5px;line-height:1.4;
   color:var(--ink-2);border-left:2px solid var(--line);
   transition:color .16s var(--ease),border-color .16s var(--ease);
 }
 .doc-nav ol a::before{
   content:'';
-  position:absolute;left:13px;top:17px;
+  position:absolute;left:13px;top:18px;
   width:7px;height:7px;border-radius:50%;
   background:var(--line-2);
   transition:background-color .16s var(--ease);
