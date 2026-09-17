@@ -790,6 +790,49 @@ html.gsap-motion.js .reveal.stagger > *{
 @media (max-width:520px){
   .clinic-list .loc-fact{grid-template-columns:1fr;gap:4px;}
 }
+/* Contact: the phone number is the hero of the page */
+.tel-label{
+  margin:26px 0 0;
+  font-size:14.5px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--orange-deep);
+}
+.tel-display{
+  display:inline-block;
+  margin:8px 0 12px;
+  font-family:var(--serif);
+  font-size:clamp(36px,3.8vw,52px);
+  font-weight:600;
+  letter-spacing:-.015em;
+  line-height:1.1;
+  color:var(--blue);
+  font-variant-numeric:tabular-nums;
+  border-bottom:3px solid transparent;
+  transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.tel-display:hover{color:var(--blue-2);border-bottom-color:var(--orange);}
+.tel-sub{
+  margin:0;
+  font-size:15.5px;
+  line-height:1.6;
+  color:var(--ink-3);
+  max-width:44ch;
+}
+.clinic-list-h{
+  margin:38px 0 12px;
+  font-size:21px;
+}
+
+/* The callback panel: quiet mist surface, not a stark floating card */
+.callback{
+  background:linear-gradient(180deg,var(--mist-1) 0%,#FFFFFF 70%);
+  border:1px solid rgba(1,95,156,.14);
+  border-radius:22px;
+  box-shadow:var(--shadow-soft);
+}
+
 /* The callback panel matches the height of the clinic column beside it */
 .callback{height:100%;display:flex;flex-direction:column;}
 .callback form{display:flex;flex-direction:column;flex:1;}
