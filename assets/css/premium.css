@@ -831,11 +831,22 @@ html.gsap-motion.js .reveal.stagger > *{
 }
 .cp-tel{font-weight:700;color:var(--blue);}
 .cp-tel:hover{color:var(--blue-2);}
-.cp-alt{margin-top:32px;font-size:19px;color:var(--ink-2);}
-.cp-alt a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;}
-.contact-col .emergency{margin-top:auto;}
+.contact-foot{
+  margin-top:auto;
+  padding-top:26px;
+  border-top:1px solid rgba(11,58,93,.12);
+  display:grid;
+  gap:10px;
+}
+.contact-foot p{
+  margin:0;
+  font-size:19px;
+  line-height:1.6;
+  color:var(--ink-3);
+}
+.contact-foot a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;}
 @media (max-width:900px){
-  .contact-col .emergency{margin-top:32px;}
+  .contact-foot{margin-top:36px;}
 }
 
 /* Clinic cards */
