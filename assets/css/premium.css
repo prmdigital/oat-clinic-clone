@@ -460,17 +460,42 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
   line-height:1.18;
   text-wrap:balance;
 }
-.cta-band::before{
-  content:"";
-  position:absolute;
-  left:0;right:0;top:0;
-  height:2px;
-  background:linear-gradient(90deg,transparent,rgba(143,212,255,.35) 35%,rgba(244,127,32,.45) 50%,rgba(143,212,255,.35) 65%,transparent);
-  z-index:1;
-}
 .cta-band .btn-white{
   border-radius:var(--radius-pill);
   box-shadow:0 16px 42px -14px rgba(0,0,0,.45);
+}
+
+/* Closing CTA: a contained panel resting on light ground, clear of the footer */
+.cta-band{
+  background:var(--mist-2);
+  overflow:visible;
+  padding-block:clamp(20px,2.5vw,40px) clamp(64px,7vw,110px);
+}
+.cta-band::after{display:none;}
+.cta-band .ambient-wrap{display:none;}
+.cta-band .wrap{
+  background:
+    radial-gradient(110% 140% at 12% 112%, rgba(244,127,32,.16) 0%, rgba(244,127,32,0) 52%),
+    radial-gradient(90% 120% at 88% -10%, rgba(1,95,156,.5) 0%, rgba(1,95,156,0) 58%),
+    linear-gradient(168deg,#0D3B5C 0%,#082A44 62%,#062036 100%);
+  border:1px solid rgba(143,212,255,.14);
+  border-radius:32px;
+  padding:clamp(46px,5.5vw,84px) clamp(24px,4.5vw,80px);
+  box-shadow:0 36px 80px -36px rgba(6,32,54,.5), 0 12px 30px -18px rgba(6,32,54,.35);
+  overflow:hidden;
+}
+.cta-band .wrap::before{
+  content:"";
+  position:absolute;
+  left:50%;top:0;
+  transform:translateX(-50%);
+  width:min(420px,70%);
+  height:2px;
+  background:linear-gradient(90deg,transparent,rgba(143,212,255,.4) 35%,rgba(244,127,32,.55) 50%,rgba(143,212,255,.4) 65%,transparent);
+}
+.cta-band .lede{color:#CBDDE7;}
+@media (max-width:640px){
+  .cta-band .wrap{border-radius:24px;}
 }
 
 /* ---------- Footer ---------- */
