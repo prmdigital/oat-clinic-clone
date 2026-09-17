@@ -218,23 +218,23 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   border-radius:var(--radius-pill);
-  padding:9px 17px;
-  font-size:13.5px;
+  padding:10px 18px;
+  font-size:14.5px;
   font-weight:600;
   color:var(--ink);
   box-shadow:var(--shadow-soft);
 }
 .hero-card .chip svg{color:var(--blue);}
 @media (max-width:640px){
-  .hero-card .chip{font-size:12.5px;padding:7px 13px;left:10px;bottom:10px;}
+  .hero-card .chip{font-size:13.5px;padding:8px 14px;left:10px;bottom:10px;}
   .hero-card .chip .chip-ext{display:none;}
 }
 .hero-card .credit{
   position:absolute;
   right:10px;
   top:10px;
-  font-size:10.5px;
-  color:rgba(255,255,255,.85);
+  font-size:12px;
+  color:rgba(255,255,255,.9);
   background:rgba(6,32,54,.4);
   padding:2px 8px;
   border-radius:var(--radius-pill);
@@ -285,8 +285,8 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
   right:8px;
   bottom:6px;
   z-index:1;
-  font-size:10.5px;
-  color:rgba(255,255,255,.85);
+  font-size:12px;
+  color:rgba(255,255,255,.9);
   background:rgba(6,32,54,.4);
   padding:2px 8px;
   border-radius:var(--radius-pill);
@@ -404,8 +404,8 @@ h1 em,h2 em{font-style:normal;font-weight:600;}
   position:absolute;
   right:10px;
   bottom:8px;
-  font-size:10.5px;
-  color:rgba(255,255,255,.85);
+  font-size:12px;
+  color:rgba(255,255,255,.9);
   background:rgba(6,32,54,.4);
   padding:2px 8px;
   border-radius:var(--radius-pill);
@@ -632,9 +632,9 @@ html.gsap-motion.js .reveal.stagger > *{
 .photo-figure .credit{
   position:absolute;
   right:10px;bottom:8px;
-  font-size:11px;
+  font-size:12px;
   letter-spacing:.02em;
-  color:rgba(255,255,255,.85);
+  color:rgba(255,255,255,.9);
   background:rgba(6,32,54,.45);
   padding:3px 9px;
   border-radius:var(--radius-pill);
@@ -729,8 +729,8 @@ html.gsap-motion.js .reveal.stagger > *{
 .loc-fact .k{
   display:flex;
   align-items:center;
-  font-size:12px;
-  letter-spacing:.1em;
+  font-size:13px;
+  letter-spacing:.08em;
 }
 .fact-ico{
   display:inline-flex;
@@ -779,7 +779,7 @@ html.gsap-motion.js .reveal.stagger > *{
     border:1.5px solid var(--orange-deep);
     display:grid;
     place-items:center;
-    font-size:11px;
+    font-size:12px;
     line-height:1;
     z-index:2;
   }
@@ -914,7 +914,7 @@ html.gsap-motion.js .reveal.stagger > *{
   margin-top:12px;
   padding:7px 15px;
   border-radius:var(--radius-pill);
-  font-size:13.5px;
+  font-size:14.5px;
   font-weight:600;
   background:rgba(11,58,93,.06);
   color:var(--ink-2);
@@ -1027,9 +1027,9 @@ body{font-size:19px;}
   background:none;
   color:var(--ink-3);
   font-family:var(--display);
-  font-size:13px;
+  font-size:14px;
   font-weight:600;
-  letter-spacing:.08em;
+  letter-spacing:.06em;
   padding:0;
   margin:0;
 }
@@ -1128,9 +1128,9 @@ body{font-size:19px;}
 }
 .glance-band .wrap{position:relative;z-index:1;}
 .glance-eyebrow{
-  font-size:13px;
+  font-size:14px;
   font-weight:700;
-  letter-spacing:.12em;
+  letter-spacing:.09em;
   text-transform:uppercase;
   color:var(--orange-deep);
   margin-bottom:22px;
