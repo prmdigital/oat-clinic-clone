@@ -764,12 +764,16 @@ html.gsap-motion.js .reveal.stagger > *{
 }
 .loc-fact .v{font-size:19px;line-height:1.6;}
 
-/* Contact page: clinics stack as full-width ruled rows */
+/* Contact page: clinics stack as naked ruled rows, no card chrome */
 .clinic-list{
   display:grid;
   grid-template-columns:1fr;
   gap:0;
-  border-block:0;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  box-shadow:none;
   border-top:1px solid rgba(11,58,93,.12);
 }
 .clinic-list .loc-fact{
@@ -777,14 +781,19 @@ html.gsap-motion.js .reveal.stagger > *{
   grid-template-columns:128px 1fr;
   gap:8px 20px;
   align-items:baseline;
+  background:transparent;
   border-left:0;
-  padding:18px 0;
+  padding:18px 2px;
   border-bottom:1px solid rgba(11,58,93,.12);
 }
-.clinic-list .loc-fact:first-child{padding-left:0;}
+.clinic-list .loc-fact:first-child{padding-left:2px;}
 @media (max-width:520px){
   .clinic-list .loc-fact{grid-template-columns:1fr;gap:4px;}
 }
+/* The callback panel matches the height of the clinic column beside it */
+.callback{height:100%;display:flex;flex-direction:column;}
+.callback form{display:flex;flex-direction:column;flex:1;}
+.callback form > :last-child{margin-top:auto;padding-top:14px;}
 .fact-ico{
   display:inline-flex;
   align-items:center;
