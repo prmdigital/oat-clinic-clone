@@ -790,6 +790,84 @@ html.gsap-motion.js .reveal.stagger > *{
 @media (max-width:520px){
   .clinic-list .loc-fact{grid-template-columns:1fr;gap:4px;}
 }
+/* Contact: benefit checkpoints beside the form, reference layout */
+.contact-points{
+  list-style:none;
+  margin:28px 0 0;
+  padding:0;
+  display:grid;
+  gap:20px;
+}
+.contact-points li{
+  display:grid;
+  grid-template-columns:32px 1fr;
+  gap:14px;
+  align-items:start;
+}
+.cp-ico{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:rgba(244,127,32,.14);
+  color:var(--orange-deep);
+  display:grid;
+  place-items:center;
+  margin-top:2px;
+}
+.contact-points b{
+  display:block;
+  font-family:var(--display);
+  font-size:19px;
+  font-weight:600;
+  color:var(--ink);
+}
+.contact-points li > div > span{
+  display:block;
+  margin-top:4px;
+  font-size:15.5px;
+  line-height:1.6;
+  color:var(--ink-3);
+}
+.cp-tel{font-weight:700;color:var(--blue);}
+.cp-tel:hover{color:var(--blue-2);}
+.cp-alt{margin-top:30px;font-size:15.5px;color:var(--ink-3);}
+.cp-alt a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;}
+
+/* Clinic cards */
+.clinic-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.clinic-card{
+  background:var(--white);
+  border:1px solid rgba(11,58,93,.08);
+  border-radius:18px;
+  box-shadow:var(--shadow-soft);
+  padding:26px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+}
+.clinic-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-soft-lg);
+  border-color:rgba(1,95,156,.2);
+}
+.clinic-card b{
+  font-family:var(--display);
+  font-size:21px;
+  font-weight:600;
+  color:var(--ink);
+}
+.clinic-card .addr{font-size:15.5px;line-height:1.55;color:var(--ink-2);}
+.clinic-card .tel{font-size:15.5px;font-weight:700;color:var(--blue);}
+.clinic-card .tel:hover{color:var(--blue-2);}
+.clinic-card .link-arrow{margin-top:auto;padding-top:10px;}
+@media (max-width:980px){.clinic-cards{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.clinic-cards{grid-template-columns:1fr;}}
+
 /* Contact: the phone number is the hero of the page */
 .tel-label{
   margin:26px 0 0;
